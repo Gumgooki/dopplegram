@@ -9,7 +9,9 @@ router.post('/', async (req, res, next) => {
   try {
     const newImage = await Image.create({
       imageURL: req.body.imageURL,
-      // userId: req.body.userId
+      // userId: req.body.userId.
+      //hard coding userID to 1 for testing purposes as we're not actually sending the userId down yet.
+      userId: 1
     })
     res.json(newImage)
   } catch(err) {
