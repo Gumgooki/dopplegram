@@ -12,7 +12,7 @@ const defaultImage = {}
 //action creators
 
 
-const createImage = () => ({
+const createImage = (newImage) => ({
   type: CREATE_IMAGE,
   payload: newImage,
 })
