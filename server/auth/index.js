@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {User} = require('../db/models')
+const {User, Image} = require('../db/models')
 
 
 router.post('/login', (req, res, next) => {

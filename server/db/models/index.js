@@ -15,8 +15,8 @@ const Image = require('./image')
  * instead of: const User = require('../db/models/user')
  */
 
- Image.belongsTo(User)
- User.hasMany(Image)
+User.hasMany(Image)
+Image.belongsTo(User)
 
 module.exports = {
   User,
