@@ -1,12 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {CreateImage} from './index'
+import {receiveImages} from '../store'
 
 /**
  * COMPONENT
  */
 export const UserHome = props => {
+  useEffect(()=>{
+    if(props.receiveImages){
+      props.receiveImages()
+    }
+  }, [])
+
   const {email} = props
 
   return (
@@ -26,7 +33,13 @@ const mapState = state => {
   }
 }
 
-export default connect(mapState)(UserHome)
+const mapDispatchToProps = dispatch => {
+  return {
+    receiveImages: () => dispatch(receiveImages())
+  }
+}
+
+export default connect(mapState, mapDispatchToProps)(UserHome)
 
 /**
  * PROP TYPES

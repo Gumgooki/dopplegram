@@ -6,10 +6,10 @@ const {Image} =  require('../db/models')
 
 //i want to make an api that will fetch me all of the images based on a logged in users Id
 router.get('/', async(req, res, next) => {
-  console.log(req)
   try {
     //right now just finding all the images, will adjust after i create the thunk
     const userImage = await Image.findAll()
+    console.log(userImage)
     res.json(userImage)
   } catch(err){
     next(err)
