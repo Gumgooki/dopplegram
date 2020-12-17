@@ -4,6 +4,7 @@ import history from '../history'
 // action types
 
 const CREATE_IMAGE = 'CREATE_IMAGE'
+const GET_ALL_IMAGES = 'GET_ALL_IMAGES'
 
 //initial state
 
@@ -17,6 +18,11 @@ const createImage = (newImage) => ({
   payload: newImage,
 })
 
+const getAllImages = (allImages) => ({
+  type: GET_ALL_IMAGES,
+  payload: allImages
+})
+
 //thunk creators
 
 export const uploadImage = (imageData) => async dispatch => {
@@ -28,12 +34,24 @@ export const uploadImage = (imageData) => async dispatch => {
   }
 }
 
+export const receiveImages = () => async dispatch => {
+  try{
+    //stuff to get all the images
+    let response = await axios.get('/api/image')
+    dispatch(getAllImages(response))
+  } catch(err){
+    console.log(err)
+  }
+}
+
 // reducer
 
 export default function dummyReducer (state = defaultImage, action){
   switch (action.type){
     case CREATE_IMAGE:
-      return {...state, data: [...state.data, {...action.payload}]}
+      return {...state, uploadedImage: action.payload}
+    case GET_ALL_IMAGES:
+        return{...state, allImages: action.payload}
     default:
       return state
   }
