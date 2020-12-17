@@ -5,6 +5,7 @@ import history from '../history'
 
 const CREATE_IMAGE = 'CREATE_IMAGE'
 const GET_ALL_IMAGES = 'GET_ALL_IMAGES'
+const GET_USERS_IMAGES = 'GET_USERS_IMAGES'
 
 //initial state
 
@@ -23,6 +24,11 @@ const getAllImages = (allImages) => ({
   payload: allImages
 })
 
+const getUsersImages = (usersImages) => ({
+  type: GET_USERS_IMAGES,
+  payload: usersImages
+})
+
 //thunk creators
 
 export const uploadImage = (imageData) => async dispatch => {
@@ -36,9 +42,18 @@ export const uploadImage = (imageData) => async dispatch => {
 
 export const receiveImages = () => async dispatch => {
   try{
-    //stuff to get all the images
     const {data} = await axios.get('/api/image')
     dispatch(getAllImages(data))
+  } catch(err){
+    console.log(err)
+  }
+}
+
+export const receiveUsersImages = (userId) => async dispatch => {
+  try{
+    //stuff to get some specific images
+    const {data} = await axios.get(`/api/image/${userId}`)
+    dispatch(getUsersImages(data))
   } catch(err){
     console.log(err)
   }
@@ -52,6 +67,8 @@ export default function dummyReducer (state = defaultImage, action){
       return {...state, allImages: [...state.allImages, {...action.payload}]}
     case GET_ALL_IMAGES:
         return{...state, allImages: [...action.payload]}
+    case GET_USERS_IMAGES:
+        return{...state, usersImages: [...action.payload]}
     default:
       return state
   }
