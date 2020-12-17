@@ -1,15 +1,11 @@
 const router = require('express').Router()
-const {Image} =  require('../db/models')
-
-//Created a Model for a basic Image. I have associated it with a user. This is a basic step one. Next up is for me to make a few APIs. Namely a way to create an image, as well get all the images associated with a user (for now).
+const {Image, User} =  require('../db/models')
 
 
-//i want to make an api that will fetch me all of the images based on a logged in users Id
 router.get('/', async(req, res, next) => {
   try {
-    //right now just finding all the images, will adjust after i create the thunk
-    const userImage = await Image.findAll()
-    res.json(userImage)
+    const allImages = await Image.findAll()
+    res.json(allImages)
   } catch(err){
     next(err)
   }
@@ -17,23 +13,24 @@ router.get('/', async(req, res, next) => {
 
 
 router.get('/:id', async(req, res, next) => {
-  console.log(req)
   try {
-    //this will be to get all images based on userId
+      let userImages = await Image.findAll({
+        where: {userId: req.params.id},
+        //right now we attach the endite user block. we probably don't need this here. Honestly it makes a little more sense to put this on the one that fetches all the images, so we can get stuff like usernames and whatnot.
+        include: [{
+          model: User
+        }]
+      })
+      res.json(userImages)
   } catch(err){
     next(err)
   }
 })
 
-router.post('/', async (req, res, next) => {
-  //testing what actually comes through on the button press
-  console.log(req.body)
+router.post('/:id', async (req, res, next) => {
   try {
     const newImage = await Image.create({
-      imageURL: req.body.imageURL,
-      // userId: req.body.userId.
-      //hard coding userID to 1 for testing purposes as we're not actually sending the userId down yet.
-      userId: 1
+      userId: req.params.id
     })
     res.json(newImage)
   } catch(err) {

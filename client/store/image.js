@@ -31,9 +31,10 @@ const getUsersImages = (usersImages) => ({
 
 //thunk creators
 
-export const uploadImage = (imageData) => async dispatch => {
+export const uploadImage = (imageData, id) => async dispatch => {
   try {
-    let response = await axios.post('/api/image', imageData)
+    console.log('THUNK: is this an integer?', id)
+    let response = await axios.post(`/api/image/${id}`, imageData)
     dispatch(createImage(response.data))
   } catch(err) {
     console.error(err)
@@ -51,7 +52,6 @@ export const receiveImages = () => async dispatch => {
 
 export const receiveUsersImages = (userId) => async dispatch => {
   try{
-    //stuff to get some specific images
     const {data} = await axios.get(`/api/image/${userId}`)
     dispatch(getUsersImages(data))
   } catch(err){

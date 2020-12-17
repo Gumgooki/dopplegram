@@ -4,7 +4,7 @@ import {uploadImage} from '../store/image'
 
 const mapDispatchToProps = function(dispatch){
   return {
-    createNewImage: payload => dispatch(uploadImage(payload))
+    createNewImage: (payload, id) => dispatch(uploadImage(payload, id))
   }
 }
 
@@ -12,8 +12,9 @@ class CreateImage extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      imageURL: ''
+      imageURL: '',
     }
+    console.log(props)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
   }
@@ -39,7 +40,7 @@ class CreateImage extends React.Component {
   }
   handleSubmit(event){
     event.preventDefault()
-    this.props.createNewImage(this.state)
+    this.props.createNewImage(this.state, this.props.userId)
   }
   handleChange(event) {
     this.setState({
