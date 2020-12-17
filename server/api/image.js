@@ -9,7 +9,6 @@ router.get('/', async(req, res, next) => {
   try {
     //right now just finding all the images, will adjust after i create the thunk
     const userImage = await Image.findAll()
-    console.log(userImage)
     res.json(userImage)
   } catch(err){
     next(err)

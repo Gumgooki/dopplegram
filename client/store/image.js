@@ -37,8 +37,8 @@ export const uploadImage = (imageData) => async dispatch => {
 export const receiveImages = () => async dispatch => {
   try{
     //stuff to get all the images
-    let response = await axios.get('/api/image')
-    dispatch(getAllImages(response))
+    const {data} = await axios.get('/api/image')
+    dispatch(getAllImages(data))
   } catch(err){
     console.log(err)
   }
@@ -51,7 +51,7 @@ export default function dummyReducer (state = defaultImage, action){
     case CREATE_IMAGE:
       return {...state, uploadedImage: action.payload}
     case GET_ALL_IMAGES:
-        return{...state, allImages: action.payload}
+        return{...state, allImages: [...action.payload]}
     default:
       return state
   }
