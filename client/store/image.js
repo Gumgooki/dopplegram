@@ -49,7 +49,7 @@ export const receiveImages = () => async dispatch => {
 export default function dummyReducer (state = defaultImage, action){
   switch (action.type){
     case CREATE_IMAGE:
-      return {...state, uploadedImage: action.payload}
+      return {...state, allImages: [...state.allImages, {...action.payload}]}
     case GET_ALL_IMAGES:
         return{...state, allImages: [...action.payload]}
     default:
