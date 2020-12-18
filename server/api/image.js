@@ -28,8 +28,10 @@ router.get('/:id', async(req, res, next) => {
 })
 
 router.post('/:id', async (req, res, next) => {
+  console.log(req)
   try {
     const newImage = await Image.create({
+      imageURL: req.data,
       userId: req.params.id
     })
     res.json(newImage)
