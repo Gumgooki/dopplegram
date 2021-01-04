@@ -1,7 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {uploadImage} from '../store/image'
-//just adding this to test something
 const mapDispatchToProps = function(dispatch){
   return {
     createNewImage: (payload, id) => dispatch(uploadImage(payload, id))
