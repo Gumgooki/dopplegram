@@ -39,6 +39,7 @@ class CreateImage extends React.Component {
   }
   handleSubmit(event){
     event.preventDefault()
+    console.log(this.state.imageURL)
     this.props.createNewImage(this.state, this.props.userId)
   }
   handleChange(event) {

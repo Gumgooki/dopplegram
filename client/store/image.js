@@ -33,7 +33,6 @@ const getUsersImages = (usersImages) => ({
 
 export const uploadImage = (imageData, id) => async dispatch => {
   try {
-    console.log('THUNK: is this an integer?', id)
     let response = await axios.post(`/api/image/${id}`, imageData)
     dispatch(createImage(response.data))
   } catch(err) {
