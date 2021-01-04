@@ -28,12 +28,9 @@ router.get('/:id', async(req, res, next) => {
 })
 
 router.post('/:id', async (req, res, next) => {
-  //TODO should just create one object instead of having to go through the body for imageURL and the params; if we create one object on form upload that has both, we can reduce complexity.
+  // TODO should just create one object instead of having to go through the body for imageURL and the params; if we create one object on form upload that has both, we can reduce complexity.
   try {
-    const newImage = await Image.create({
-      imageURL: req.body.imageURL,
-      userId: req.params.id
-    })
+    const newImage = await Image.create(req.body)
     res.json(newImage)
   } catch(err) {
     next(err)

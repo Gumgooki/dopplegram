@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {uploadImage} from '../store/image'
 const mapDispatchToProps = function(dispatch){
   return {
-    createNewImage: (payload, id) => dispatch(uploadImage(payload, id))
+    createNewImage: (payload) => dispatch(uploadImage(payload))
   }
 }
 
@@ -12,8 +12,8 @@ class CreateImage extends React.Component {
     super(props)
     this.state = {
       imageURL: '',
+      userId: this.props.userId
     }
-    console.log(props)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
   }
@@ -39,8 +39,8 @@ class CreateImage extends React.Component {
   }
   handleSubmit(event){
     event.preventDefault()
-    console.log(this.state.imageURL)
-    this.props.createNewImage(this.state, this.props.userId)
+    console.log('state', this.state, 'just user ID', this.props.userId)
+    this.props.createNewImage(this.state)
   }
   handleChange(event) {
     this.setState({
