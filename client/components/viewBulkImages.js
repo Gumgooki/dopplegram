@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import {connect} from 'react-redux'
 import {receiveImages} from '../store'
+import moment from 'moment'
 
 const mapDispatchToProps = function(dispatch){
   return {
@@ -27,7 +28,7 @@ export const ViewBulkImages = props =>{
         (
           <div key={imageObj.id}>
             <h1>{imageObj.imageURL}</h1>
-            <p>Time Uploaded: {imageObj.createdAt}</p>
+            <p>Time Uploaded: {moment(imageObj.createdAt).fromNow()}</p>
             <img src={imageObj.imageURL}/>
           </div>
         )
