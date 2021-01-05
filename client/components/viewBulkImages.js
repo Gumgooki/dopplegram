@@ -16,8 +16,26 @@ const mapStateToProps = state => {
 
 export const ViewBulkImages = props =>{
   useEffect(()=>{
-    props.viewAllImages()
-  })
+    if(props.viewAllImages){
+      props.viewAllImages()
+    }
+  }, [])
+
+  return (
+    <div>
+      {props.allimages &&
+        props.allImages.map(imageObj => {
+        return (
+          <div key={imageObj.id}>
+            <h1>{imageObj.imageURL}</h1>
+            <p>Time Uploaded: {imageObj.createAt}</p>
+            <img src={imageObj.imageURL}/>
+          </div>
+        )
+      })}
+    </div>
+  )
+
 }
 //need create a react component that can fetch a list of all imageURLs in an array
 //will then need to loop through that array and display within an <image> tag for now
