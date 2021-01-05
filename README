@@ -1,0 +1,17 @@
+This is a practice project so i can get more comfortable with React/Redux, Express, and Sequelize.
+Dopplegram is meant to replicate the basic functionality of Instagram.
+
+You should be able to do the following:
+-View a feed of images either ordered by date or by populatity
+-See how who posted the image, and how many likes/comments an image has received on the feed
+-Read comments and see all people who liked an image, on the specific image viewing
+-Post comments and like images
+-Upload images
+-Choose to delete your own images
+-Follow other users
+-Get notifications for when a user you follow posts and when you receive a like/comment on your image
+
+
+Extras:
+-Extra filters for viewing images (tags)
+-Apply filter
