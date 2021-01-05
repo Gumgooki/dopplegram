@@ -22,17 +22,16 @@ export const ViewBulkImages = props =>{
   }, [])
 
   return (
-    <div>
-      {props.allimages &&
-        props.allImages.map(imageObj => {
-        return (
+    <div className="AllImages">
+      {props.allImages && props.allImages.map(imageObj =>
+        (
           <div key={imageObj.id}>
             <h1>{imageObj.imageURL}</h1>
-            <p>Time Uploaded: {imageObj.createAt}</p>
+            <p>Time Uploaded: {imageObj.createdAt}</p>
             <img src={imageObj.imageURL}/>
           </div>
         )
-      })}
+      )}
     </div>
   )
 

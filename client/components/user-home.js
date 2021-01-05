@@ -10,11 +10,11 @@ import {receiveImages, receiveUsersImages} from '../store'
 
  //TODO will want to probably remove the useEffects from here once i've set up components to viewBulkImages and view personal images
 export const UserHome = props => {
-  useEffect(()=>{
-    if(props.receiveImages){
-      props.receiveImages()
-    }
-  }, [])
+  // useEffect(()=>{
+  //   if(props.receiveImages){
+  //     props.receiveImages()
+  //   }
+  // }, [])
 
   useEffect(() => {
     props.receiveUsersImages(props.id)
