@@ -28,7 +28,7 @@ export const ViewBulkImages = props =>{
         (
           <div key={imageObj.id}>
             <h1>{imageObj.imageURL}</h1>
-            <p>Time Uploaded: {moment(imageObj.createdAt).fromNow()}</p>
+            <p>Uploaded {moment(imageObj.createdAt).fromNow()}</p>
             <img src={imageObj.imageURL}/>
           </div>
         )
