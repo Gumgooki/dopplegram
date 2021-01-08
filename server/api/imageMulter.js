@@ -30,14 +30,13 @@ const upload = multer({
 })
 
 
-router.post(upload.single('imageData'), async (req, res, next) => {
+router.post('/', upload.single('imageData'), async (req, res, next) => {
   console.log(req.body)
   try{
     const newImage = await ImageSchema.create({
       imageName: req.body.imageName,
       imageData: req.file.path
     })
-
     res.status(200).json({
       success: true,
       document: newImage
@@ -46,3 +45,5 @@ router.post(upload.single('imageData'), async (req, res, next) => {
     next(err)
   }
 })
+
+module.exports = router

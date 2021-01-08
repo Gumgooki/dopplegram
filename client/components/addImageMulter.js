@@ -3,6 +3,8 @@ import React from 'react'
 
 //TODO this implementation does not have any ties with redux. right now this is just for testing purposes to see what Multer can do.
 
+const DefaultImg = "https://www.stevenstaekwondo.com/wp-content/uploads/2017/04/default-image-620x600.jpg"
+
 export default class AddImageMulter extends React.Component {
   constructor(props){
     super(props)
@@ -33,7 +35,7 @@ export default class AddImageMulter extends React.Component {
       multerImage: URL.createObjectURL(e.target.files[0])
     })
 
-    axios.post('/api/imageMulter', imageFormObj).then((data) => {
+    axios.post('/api/image-multer', imageFormObj).then((data) => {
       if(data.data.success){
         this.setDefaultImage("multer")
       }
