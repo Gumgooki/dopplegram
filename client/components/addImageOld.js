@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {uploadImage} from '../store/image'
 const mapDispatchToProps = function(dispatch){
   return {
-    createNewImage: (payload) => dispatch(uploadImage(payload))
+    createNewImage: (payload, id) => dispatch(uploadImage(payload, id))
   }
 }
 

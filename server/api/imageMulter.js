@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {ImageSchema} =  require('../db/models')
+const {Image} =  require('../db/models')
 const multer = require('multer')
 
 const storage = multer.diskStorage({
@@ -31,7 +31,7 @@ const upload = multer({
 
 router.post('/', upload.single('imageData'),  (req, res, next) => {
   try{
-    const newImage = new ImageSchema({
+    const newImage = new Image({
       imageName: req.body.imageName,
       imageData: req.file.path
     })

@@ -31,9 +31,9 @@ const getUsersImages = (usersImages) => ({
 
 //thunk creators
 
-export const uploadImage = (imageData) => async dispatch => {
+export const uploadImage = (imageData, userId) => async dispatch => {
   try {
-    let response = await axios.post(`/api/image/${imageData.userId}`, imageData)
+    let response = await axios.post(`/api/image/${userId}`, imageData)
     dispatch(createImage(response.data))
   } catch(err) {
     console.error(err)

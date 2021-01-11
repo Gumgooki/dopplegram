@@ -4,7 +4,12 @@ const db = require('../db')
 const Image = db.define('image', {
   imageName: {
     type: Sequelize.STRING,
-    defaultValue: 'https://via.placeholder.com/140x100'
+    defaultValue: "none",
+    required: true
+  },
+  imageData: {
+    type: Sequelize.STRING,
+    required: true
   }
 })
 

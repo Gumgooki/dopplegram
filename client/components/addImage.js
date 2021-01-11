@@ -1,11 +1,19 @@
 import axios from 'axios'
 import React from 'react'
+import {connect} from 'react-redux'
+import {uploadImage} from '../store/image'
 
+
+const mapDispatchToProps = function(dispatch){
+  return {
+    createNewImage: (payload, id) => dispatch(uploadImage(payload, id))
+  }
+}
 //TODO this implementation does not have any ties with redux. right now this is just for testing purposes to see what Multer can do.
 
 const DefaultImg = "https://www.stevenstaekwondo.com/wp-content/uploads/2017/04/default-image-620x600.jpg"
 
-export default class AddImage extends React.Component {
+class AddImage extends React.Component {
   constructor(props){
     super(props)
 
@@ -16,17 +24,17 @@ export default class AddImage extends React.Component {
 
   uploadImage(e){
 
-    let imageFormObj = new FormData()
+    let imageData = new FormData()
 
-    imageFormObj.append("imageName", "multer-image-" + Date.now())
-    imageFormObj.append("imageData", e.target.files[0])
+    imageData.append("imageName", "multer-image-" + Date.now())
+    imageData.append("imageData", e.target.files[0])
     //store a readable instance of the image being uploaded using multer
 
     this.setState({
       multerImage: URL.createObjectURL(e.target.files[0])
     })
 
-    axios.post(`/api/image-multer`, imageFormObj).then((data) => {
+    this.props.createNewImage(imageData, this.props.userId).then((data) => {
       if(data.data.success){
         this.setState({
           multerImage: DefaultImg
@@ -48,3 +56,6 @@ export default class AddImage extends React.Component {
     )
   }
 }
+
+
+export default connect(null, mapDispatchToProps)(AddImage)

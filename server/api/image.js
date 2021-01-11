@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Image, User, ImageSchema} =  require('../db/models')
+const {Image, User} =  require('../db/models')
 const multer = require('multer')
 
 router.get('/', async(req, res, next) => {
@@ -59,15 +59,16 @@ const upload = multer({
 /// End of code block needed for image upload via Multer
 //TODO: make sure i set up the post to look for USER ID like the old one; remove the old API; update the component/thunk to look for this API
 //NEW POST BLOCK
-router.post('/:id', upload.single('imageData'), (req, res, next) => {
+router.post('/:id', upload.single('imageData'), async (req, res, next) => {
   try{
-    const newImage = new ImageSchema({
+    const newImage = new Image({
       //TODO: old API just sent one object; because we're making a new object, we'll need to add the User ID onto this or add it to the object that gets posted
       imageName: req.body.imageName,
-      imageData: req.file.path
+      imageData: req.file.path,
+      userId: req.params.id
     })
 
-    newImage.save()
+    await newImage.save()
       .then((result)=> {
         res.status(200).json({
           success:true,
