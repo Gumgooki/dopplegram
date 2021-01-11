@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {AddImageMulter, CreateImage, ViewBulkImages} from './index'
+import {AddImage, CreateImage, ViewBulkImages} from './index'
 import {receiveImages, receiveUsersImages} from '../store'
 
 /**
@@ -26,7 +26,7 @@ export const UserHome = props => {
     <div>
       <h3>Welcome, {email}</h3>
       {/* <CreateImage userId={props.id}/> */}
-      <AddImageMulter/>
+      <AddImage userId = {props.id}/>
       {/* <ViewBulkImages/> */}
     </div>
   )

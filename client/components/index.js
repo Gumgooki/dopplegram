@@ -6,6 +6,5 @@
 export {default as Navbar} from './navbar'
 export {default as UserHome} from './user-home'
 export {Login, Signup} from './authform'
-export {default as CreateImage} from './addImage'
+export {default as AddImage} from './addImage'
 export {default as ViewBulkImages} from './viewBulkImages'
-export {default as AddImageMulter} from './addImageMulter'

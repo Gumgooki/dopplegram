@@ -1,52 +1,50 @@
+import axios from 'axios'
 import React from 'react'
-import {connect} from 'react-redux'
-import {uploadImage} from '../store/image'
-const mapDispatchToProps = function(dispatch){
-  return {
-    createNewImage: (payload) => dispatch(uploadImage(payload))
-  }
-}
 
-class CreateImage extends React.Component {
+//TODO this implementation does not have any ties with redux. right now this is just for testing purposes to see what Multer can do.
+
+const DefaultImg = "https://www.stevenstaekwondo.com/wp-content/uploads/2017/04/default-image-620x600.jpg"
+
+export default class AddImage extends React.Component {
   constructor(props){
     super(props)
+
     this.state = {
-      imageURL: '',
-      userId: this.props.userId
+      multerImage: DefaultImg
     }
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleChange = this.handleChange.bind(this)
+  }
+
+  uploadImage(e){
+
+    let imageFormObj = new FormData()
+
+    imageFormObj.append("imageName", "multer-image-" + Date.now())
+    imageFormObj.append("imageData", e.target.files[0])
+    //store a readable instance of the image being uploaded using multer
+
+    this.setState({
+      multerImage: URL.createObjectURL(e.target.files[0])
+    })
+
+    axios.post(`/api/image-multer`, imageFormObj).then((data) => {
+      if(data.data.success){
+        this.setState({
+          multerImage: DefaultImg
+        })
+      }
+    }).catch((err)=> {
+      console.error(err)
+      this.setState({
+        multerImage: DefaultImg
+      })
+    })
   }
   render(){
     return(
       <div>
-        <h2>Add Image</h2>
-        <form onSubmit={this.handleSubmit}>
-          <div>
-            <label htmlFor="imageURL">
-              <strong>imageURL:</strong>
-            </label>
-          </div>
-          <input
-            type="text"
-            name="imageURL"
-            value={this.state.imageURL}
-            onChange={this.handleChange}/>
-          <button type="submit">Submit</button>
-        </form>
+        <input type="file" onChange={(e)=>this.uploadImage(e, "multer")}/>
+        <img src={this.state.multerImage}/>
       </div>
     )
   }
-  handleSubmit(event){
-    event.preventDefault()
-    console.log('state', this.state, 'just user ID', this.props.userId)
-    this.props.createNewImage(this.state)
-  }
-  handleChange(event) {
-    this.setState({
-      [event.target.name]:event.target.value
-    })
-  }
 }
-
-export default connect(null, mapDispatchToProps)(CreateImage)

@@ -29,17 +29,20 @@ const upload = multer({
   fileFilter: fileFilter
 })
 
-router.post('/', upload.single('imageData'), async (req, res, next) => {
-  console.log('after posting')
+router.post('/', upload.single('imageData'),  (req, res, next) => {
   try{
-    const newImage = await ImageSchema.create({
+    const newImage = new ImageSchema({
       imageName: req.body.imageName,
       imageData: req.file.path
     })
-    res.status(200).json({
-      success: true,
-      document: newImage
-    })
+
+    newImage.save()
+      .then((result)=> {
+        res.status(200).json({
+          success:true,
+          document: result
+        })
+      })
   } catch(err){
     next(err)
   }
