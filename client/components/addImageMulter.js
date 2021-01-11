@@ -36,8 +36,9 @@ export default class AddImageMulter extends React.Component {
     this.setState({
       multerImage: URL.createObjectURL(e.target.files[0])
     })
-
+    console.log('before',imageFormObj)
     axios.post(`${API_URL}/api/image-multer`, imageFormObj).then((data) => {
+      console.log('after',imageFormObj)
       if(data.data.success){
         // this.setDefaultImage("multer")
       }

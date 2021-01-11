@@ -4,7 +4,7 @@ const multer = require('multer')
 
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
-    cb(null, './uploads/')
+    cb(null,'./public/uploads/')
   },
   filename: function (req, file, cb){
     cb(null, Date.now() + file.originalname)
@@ -29,9 +29,8 @@ const upload = multer({
   fileFilter: fileFilter
 })
 
-
 router.post('/', upload.single('imageData'), async (req, res, next) => {
-  console.log(req.body)
+  console.log('after posting')
   try{
     const newImage = await ImageSchema.create({
       imageName: req.body.imageName,
