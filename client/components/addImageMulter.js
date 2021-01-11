@@ -5,6 +5,8 @@ import React from 'react'
 
 const DefaultImg = "https://www.stevenstaekwondo.com/wp-content/uploads/2017/04/default-image-620x600.jpg"
 
+const API_URL = "http://localhost:3000"
+
 export default class AddImageMulter extends React.Component {
   constructor(props){
     super(props)
@@ -35,13 +37,13 @@ export default class AddImageMulter extends React.Component {
       multerImage: URL.createObjectURL(e.target.files[0])
     })
 
-    axios.post('/api/image-multer', imageFormObj).then((data) => {
+    axios.post(`${API_URL}/api/image-multer`, imageFormObj).then((data) => {
       if(data.data.success){
-        this.setDefaultImage("multer")
+        // this.setDefaultImage("multer")
       }
     }).catch((err)=> {
       console.error(err)
-      this.setDefaultImage("multer")
+      // this.setDefaultImage("multer")
     })
   }
   render(){

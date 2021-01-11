@@ -11,6 +11,7 @@ const sequelizeStore = require('connect-session-sequelize')(session.Store) //cre
 const dbStore = new sequelizeStore({db: db}) //configuring and creating our database store so we can save session data directly in DB
 const port = process.env.PORT || 3000;
 const socketio = require('socket.io')
+const cors = require('cors')
 module.exports = app
 
 // keep all of our secret API keys in 'secrets.js'. If we gitignore that file, then nothing will ever show up in git.
@@ -37,6 +38,9 @@ passport.deserializeUser(async (id, done) => {
 })
 
 const createApp = () => {
+  //installing CORS to see if that fixes my issues
+  app.use(cors())
+
   //logging middleware
   app.use(morgan('dev'))
 
@@ -46,7 +50,7 @@ const createApp = () => {
 
 
   //creating a static path to the uploads folder, for use with image upload
-  app.use('../public/uploads', express.static('uploads'))
+  app.use('/uploads', express.static('uploads'))
 
   //this is optional middleware that gives us session information thats normally saved in memory
   app.use(session({
