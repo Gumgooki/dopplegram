@@ -20,5 +20,5 @@ Image.belongsTo(User)
 
 module.exports = {
   User,
-  Image
+  Image,
 }

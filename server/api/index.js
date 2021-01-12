@@ -5,6 +5,7 @@ router.use('/puppies', require('./puppies')); // matches all requests to  /api/p
 router.use('/kittens', require('./kittens')); // matches all requests to  /api/kittens/
 router.use('/image', require('./image')) //matches all request to /api/image/
 
+
 module.exports = router;
 
 //for routes that don't exist

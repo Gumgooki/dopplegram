@@ -37,6 +37,7 @@ passport.deserializeUser(async (id, done) => {
 })
 
 const createApp = () => {
+
   //logging middleware
   app.use(morgan('dev'))
 
@@ -64,6 +65,9 @@ const createApp = () => {
 
   //serving up static resources from my server
   app.use(express.static(path.join(__dirname, '../public/')))
+
+   //creating a static path to the uploads folder, for use with image upload
+   app.use('../public/uploads/', express.static('uploads'))
 
   //this is sending our index.html file for anything that doesn't match any routes
   app.get('*', function (req, res) {
