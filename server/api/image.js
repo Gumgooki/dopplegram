@@ -5,7 +5,6 @@ const multer = require('multer')
 router.get('/', async(req, res, next) => {
   try {
     const allImages = await Image.findAll()
-    console.log('allImages', allImages)
     res.json(allImages)
   } catch(err){
     next(err)
@@ -22,7 +21,6 @@ router.get('/:id', async(req, res, next) => {
           model: User
         }]
       })
-      console.log('userImages', userImages)
       res.json(userImages)
   } catch(err){
     next(err)
@@ -33,7 +31,7 @@ router.get('/:id', async(req, res, next) => {
 //Code needed for to upload with multer and store images on the server
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
-    cb(null,'./public/uploads/')
+    cb(null,'public/uploads/')
   },
   filename: function (req, file, cb){
     cb(null, Date.now() + file.originalname)
@@ -66,7 +64,7 @@ router.post('/:id', upload.single('imageData'), async (req, res, next) => {
     const newImage = new Image({
       //TODO: old API just sent one object; because we're making a new object, we'll need to add the User ID onto this or add it to the object that gets posted
       imageName: req.body.imageName,
-      imageData: req.file.path,
+      imageData: req.file.path.substr(7),
       userId: req.params.id
     })
 
@@ -81,16 +79,5 @@ router.post('/:id', upload.single('imageData'), async (req, res, next) => {
     next(err)
   }
 })
-
-//OLD ONE
-// router.post('/:id', async (req, res, next) => {
-//   // TODO should just create one object instead of having to go through the body for imageURL and the params; if we create one object on form upload that has both, we can reduce complexity.
-//   try {
-//     const newImage = await Image.create(req.body)
-//     res.json(newImage)
-//   } catch(err) {
-//     next(err)
-//   }
-// })
 
 module.exports = router

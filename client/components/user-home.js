@@ -26,7 +26,7 @@ export const UserHome = props => {
     <div>
       <h3>Welcome, {email}</h3>
       <AddImage userId = {props.id}/>
-      {/* <ViewBulkImages/> */}
+      <ViewBulkImages/>
     </div>
   )
 }
