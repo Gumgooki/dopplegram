@@ -1,4 +1,3 @@
-import axios from 'axios'
 import React from 'react'
 import {connect} from 'react-redux'
 import {uploadImage} from '../store/image'
@@ -9,8 +8,6 @@ const mapDispatchToProps = function(dispatch){
     createNewImage: (payload, id) => dispatch(uploadImage(payload, id))
   }
 }
-//TODO this implementation does not have any ties with redux. right now this is just for testing purposes to see what Multer can do.
-
 const DefaultImg = "https://www.stevenstaekwondo.com/wp-content/uploads/2017/04/default-image-620x600.jpg"
 
 class AddImage extends React.Component {

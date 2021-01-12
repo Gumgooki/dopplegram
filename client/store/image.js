@@ -29,16 +29,17 @@ const getUsersImages = (usersImages) => ({
   payload: usersImages
 })
 
-//thunk creators
-
+// thunk creators
 export const uploadImage = (imageData, userId) => async dispatch => {
   try {
     let response = await axios.post(`/api/image/${userId}`, imageData)
-    dispatch(createImage(response.data))
+    dispatch(createImage(response.data.document))
+    return response
   } catch(err) {
     console.error(err)
   }
 }
+
 
 export const receiveImages = () => async dispatch => {
   try{
@@ -63,7 +64,7 @@ export const receiveUsersImages = (userId) => async dispatch => {
 export default function dummyReducer (state = defaultImage, action){
   switch (action.type){
     case CREATE_IMAGE:
-      return {...state, allImages: [...state.allImages, {...action.payload}]}
+      return {...state, usersImages: [...state.usersImages, {...action.payload}], allImages: [...state.allImages, {...action.payload}]}
     case GET_ALL_IMAGES:
         return{...state, allImages: [...action.payload]}
     case GET_USERS_IMAGES:

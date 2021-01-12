@@ -5,6 +5,7 @@ const multer = require('multer')
 router.get('/', async(req, res, next) => {
   try {
     const allImages = await Image.findAll()
+    console.log('allImages', allImages)
     res.json(allImages)
   } catch(err){
     next(err)
@@ -21,6 +22,7 @@ router.get('/:id', async(req, res, next) => {
           model: User
         }]
       })
+      console.log('userImages', userImages)
       res.json(userImages)
   } catch(err){
     next(err)
