@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import {connect} from 'react-redux'
 import {receiveImages} from '../store'
 import moment from 'moment'
+import {SingleImage} from '../components'
 
 const mapDispatchToProps = function(dispatch){
   return {
@@ -26,12 +27,7 @@ export const ViewBulkImages = props =>{
     <div className="AllImages">
       {props.allImages && props.allImages.map(imageObj =>
         (
-          <div key={imageObj.id}>
-            <h1>{imageObj.imageName}</h1>
-            <p>Uploaded {moment(imageObj.createdAt).fromNow()}</p>
-            <img src={imageObj.imageData}/>
-            <p>Uploaded By {imageObj.userId}</p>
-          </div>
+          <SingleImage key={imageObj.id} imageObj={imageObj}/>
         )
       )}
     </div>
