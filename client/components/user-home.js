@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {AddImage, CreateImage, ViewBulkImages} from './index'
+import {AddImage, ViewAllImages, ViewAllUsersImages} from './index'
 import {receiveImages, receiveUsersImages} from '../store'
 
 /**
@@ -10,15 +10,6 @@ import {receiveImages, receiveUsersImages} from '../store'
 
  //TODO will want to probably remove the useEffects from here once i've set up components to viewBulkImages and view personal images
 export const UserHome = props => {
-  useEffect(()=>{
-    if(props.receiveImages){
-      props.receiveImages()
-    }
-  }, [])
-
-  useEffect(() => {
-    props.receiveUsersImages(props.id)
-  })
 
   const {email} = props
 
@@ -26,7 +17,8 @@ export const UserHome = props => {
     <div>
       <h3>Welcome, {email}</h3>
       <AddImage userId = {props.id}/>
-      <ViewBulkImages/>
+      <ViewAllImages/>
+      <ViewAllUsersImages userId={props.id}/>
     </div>
   )
 }

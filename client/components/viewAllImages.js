@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import {connect} from 'react-redux'
 import {receiveImages} from '../store'
-import moment from 'moment'
+import {SingleImage} from '.'
 
 const mapDispatchToProps = function(dispatch){
   return {
-    viewAllImages: () => dispatch(receiveImages())
+    getAllImages: () => dispatch(receiveImages())
   }
 }
 
@@ -15,10 +15,10 @@ const mapStateToProps = state => {
   }
 }
 
-export const ViewBulkImages = props =>{
+export const ViewAllImages = props =>{
   useEffect(()=>{
-    if(props.viewAllImages){
-      props.viewAllImages()
+    if(props.getAllImages){
+      props.getAllImages()
     }
   }, [])
 
@@ -26,12 +26,7 @@ export const ViewBulkImages = props =>{
     <div className="AllImages">
       {props.allImages && props.allImages.map(imageObj =>
         (
-          <div key={imageObj.id}>
-            <h1>{imageObj.imageName}</h1>
-            <p>Uploaded {moment(imageObj.createdAt).fromNow()}</p>
-            <img src={imageObj.imageData}/>
-            <p>Uploaded By {imageObj.userId}</p>
-          </div>
+          <SingleImage key={imageObj.id} imageObj={imageObj}/>
         )
       )}
     </div>
@@ -43,4 +38,4 @@ export const ViewBulkImages = props =>{
 //in the future, we should add a link to the <image> tag with a link to the SingleImage componenent so users can travel deeper
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(ViewBulkImages)
+export default connect(mapStateToProps, mapDispatchToProps)(ViewAllImages)
