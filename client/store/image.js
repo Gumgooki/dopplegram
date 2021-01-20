@@ -6,6 +6,7 @@ import history from '../history'
 const CREATE_IMAGE = 'CREATE_IMAGE'
 const GET_ALL_IMAGES = 'GET_ALL_IMAGES'
 const GET_USERS_IMAGES = 'GET_USERS_IMAGES'
+const DELETE_USER_IMAGE = 'DELETE_USER_IMAGE'
 
 //initial state
 
@@ -27,6 +28,11 @@ const getAllImages = (allImages) => ({
 const getUsersImages = (usersImages) => ({
   type: GET_USERS_IMAGES,
   payload: usersImages
+})
+
+const removeImage = (deletedImage) => ({
+  type: DELETE_USER_IMAGE,
+  payload: deletedImage
 })
 
 // thunk creators
@@ -60,6 +66,15 @@ export const receiveUsersImages = (userId) => async dispatch => {
   }
 }
 
+export const deleteImage = (userId, imageId) => async dispatch => {
+  try{
+    const {data} = await axios.get(`/api/image/${userId}/${imageId}`)
+    dispatch(removeImage(data))
+  }catch(err){
+    console.log(err)
+  }
+}
+
 // reducer
 
 export default function dummyReducer (state = defaultImage, action){
@@ -70,6 +85,9 @@ export default function dummyReducer (state = defaultImage, action){
         return{...state, allImages: [...action.payload]}
     case GET_USERS_IMAGES:
         return{...state, usersImages: [...action.payload]}
+    case DELETE_USER_IMAGE:
+        //TODO: need to fix this so it actually removes the images from these state objects; not sure of the best way to do that yet.
+        return{...state, userImages: [...state.userImages], allImages: [...state.allImages]}
     default:
       return state
   }

@@ -90,7 +90,7 @@ router.post('/:id', upload.single('imageData'), async (req, res, next) => {
   }
 })
 
-router.delete('/:imageId/:userId', async (req, res, next) => {
+router.delete('/:userId/:imageId', async (req, res, next) => {
   //need to be able to delete an image
   //TODO how do we ensure that only users that own these images can actually delete them?
   //Do we reference the user state ID and incorporate that into the URL? something like /imageId/userId/?
@@ -103,7 +103,7 @@ router.delete('/:imageId/:userId', async (req, res, next) => {
         userId: req.params.userId
       }
     })
-    await delImage.destoy()
+    await delImage.destroy()
     res.status(201).json(delImage)
   } catch(err){
     next(err)
