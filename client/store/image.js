@@ -33,6 +33,7 @@ const getUsersImages = (usersImages) => ({
 export const uploadImage = (imageData, userId) => async dispatch => {
   try {
     let response = await axios.post(`/api/image/${userId}`, imageData)
+    console.log(response.data)
     dispatch(createImage(response.data.document))
     return response
   } catch(err) {
