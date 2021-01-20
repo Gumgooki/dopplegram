@@ -90,4 +90,25 @@ router.post('/:id', upload.single('imageData'), async (req, res, next) => {
   }
 })
 
+router.delete('/:imageId/:userId', async (req, res, next) => {
+  //need to be able to delete an image
+  //TODO how do we ensure that only users that own these images can actually delete them?
+  //Do we reference the user state ID and incorporate that into the URL? something like /imageId/userId/?
+  //There needs to be a better way to check this too; before sending request we need to make sure the ID actually matches with the ID on state, so it can't be spoofed
+  //The component should also only load for logged in users; maybe we need an edit image component where you can make edits and also delete? lock this component off
+  try{
+    const delImage = await Image.findOne({
+      where: {
+        id: req.params.imageId,
+        userId: req.params.userId
+      }
+    })
+    await delImage.destoy()
+    res.status(201).json(delImage)
+  } catch(err){
+    next(err)
+  }
+})
+
+
 module.exports = router
