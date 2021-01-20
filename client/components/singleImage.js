@@ -10,7 +10,7 @@ export const SingleImage = props => {
       <h1>{imageObj.imageName}</h1>
       <p>Uploaded {moment(imageObj.createdAt).fromNow()}</p>
       <img src={imageObj.imageData}/>
-      <p>Uploaded By {imageObj.userId}</p>
+      <p>Uploaded By {imageObj.user.email}</p>
       <p>Comments:</p>
       {/* We'll put the comments here; will probably need to loop over */}
     </div>

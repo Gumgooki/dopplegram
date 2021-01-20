@@ -4,7 +4,13 @@ const multer = require('multer')
 
 router.get('/', async(req, res, next) => {
   try {
-    const allImages = await Image.findAll()
+    const allImages = await Image.findAll({
+      //including this on any image instance just because we will want to eventuall access the username, comments, and whatnot
+      include: [{
+        model: User,
+        attributes: ['email']
+      }]
+    })
     res.json(allImages)
   } catch(err){
     next(err)
@@ -16,9 +22,9 @@ router.get('/:id', async(req, res, next) => {
   try {
       let userImages = await Image.findAll({
         where: {userId: req.params.id},
-        //right now we attach the endite user block. we probably don't need this here. Honestly it makes a little more sense to put this on the one that fetches all the images, so we can get stuff like usernames and whatnot.
         include: [{
-          model: User
+          model: User,
+          attributes: ['email']
         }]
       })
       res.json(userImages)
@@ -57,24 +63,28 @@ const upload = multer({
 })
 
 /// End of code block needed for image upload via Multer
-//TODO: make sure i set up the post to look for USER ID like the old one; remove the old API; update the component/thunk to look for this API
-//NEW POST BLOCK
 router.post('/:id', upload.single('imageData'), async (req, res, next) => {
   try{
     const newImage = new Image({
-      //TODO: old API just sent one object; because we're making a new object, we'll need to add the User ID onto this or add it to the object that gets posted
       imageName: req.body.imageName,
       imageData: req.file.path.substr(7),
       userId: req.params.id
     })
 
     await newImage.save()
-      .then((result)=> {
-        res.status(200).json({
-          success:true,
-          document: result
-        })
-      })
+
+
+    let returnImage = await Image.findOne({
+      where: {id: newImage.id},
+      include: [{
+        model: User,
+        attributes: ['email']
+      }]
+    })
+    res.status(200).json({
+      success:true,
+      document: returnImage
+    })
   } catch(err){
     next(err)
   }
