@@ -30,9 +30,10 @@ const getUsersImages = (usersImages) => ({
   payload: usersImages
 })
 
-const removeImage = (deletedImage) => ({
+const removeImage = (deletedImage, id) => ({
   type: DELETE_USER_IMAGE,
-  payload: deletedImage
+  payload: deletedImage,
+  delImgId: id
 })
 
 // thunk creators
@@ -68,8 +69,8 @@ export const receiveUsersImages = (userId) => async dispatch => {
 
 export const deleteImage = (userId, imageId) => async dispatch => {
   try{
-    const {data} = await axios.get(`/api/image/${userId}/${imageId}`)
-    dispatch(removeImage(data))
+    const {data} = await axios.delete(`/api/image/${userId}/${imageId}`)
+    dispatch(removeImage(data, imageId))
   }catch(err){
     console.log(err)
   }
@@ -86,8 +87,11 @@ export default function dummyReducer (state = defaultImage, action){
     case GET_USERS_IMAGES:
         return{...state, usersImages: [...action.payload]}
     case DELETE_USER_IMAGE:
-        //TODO: need to fix this so it actually removes the images from these state objects; not sure of the best way to do that yet.
-        return{...state, userImages: [...state.userImages], allImages: [...state.allImages]}
+        return {
+          ...state,
+          usersImages: [...state.usersImages.filter((image) => image.id !== action.delImgId)],
+          allImages: [...state.allImages.filter((image) => image.id !== action.delImgId)]
+        }
     default:
       return state
   }
