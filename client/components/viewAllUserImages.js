@@ -11,7 +11,8 @@ const mapDispatchToProps = function(dispatch){
 
 const mapStateToProps = state => {
   return{
-    allUsersImages: state.image.usersImages
+    allUsersImages: state.image.usersImages,
+    userId: state.user.id
   }
 }
 

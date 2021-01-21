@@ -8,6 +8,13 @@ const mapDispatchToProps = function(dispatch){
     createNewImage: (payload, id) => dispatch(uploadImage(payload, id))
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    userId: state.user.id
+  }
+}
+
 const DefaultImg = "https://www.stevenstaekwondo.com/wp-content/uploads/2017/04/default-image-620x600.jpg"
 
 class AddImage extends React.Component {
@@ -55,4 +62,4 @@ class AddImage extends React.Component {
 }
 
 
-export default connect(null, mapDispatchToProps)(AddImage)
+export default connect(mapStateToProps, mapDispatchToProps)(AddImage)
