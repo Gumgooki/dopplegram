@@ -6,12 +6,15 @@ import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
-    <h1>Gumgooki Boilerplate</h1>
+    <h1>DoppleGram</h1>
     <nav>
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
+          <Link to="/upload">Upload</Link>
           <Link to="/home">Home</Link>
+          <Link to="/my-images">My Images</Link>
+          <Link to="/account">Account</Link>
           <a href="#" onClick={handleClick}>
             Logout
           </a>
