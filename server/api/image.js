@@ -97,13 +97,12 @@ router.delete('/:userId/:imageId', async (req, res, next) => {
   //There needs to be a better way to check this too; before sending request we need to make sure the ID actually matches with the ID on state, so it can't be spoofed
   //The component should also only load for logged in users; maybe we need an edit image component where you can make edits and also delete? lock this component off
   try{
-    const delImage = await Image.findOne({
+    const delImage = await Image.destroy({
       where: {
         id: req.params.imageId,
         userId: req.params.userId
       }
     })
-    await delImage.destroy()
     res.status(201).json(delImage)
   } catch(err){
     next(err)

@@ -68,7 +68,7 @@ export const receiveUsersImages = (userId) => async dispatch => {
 
 export const deleteImage = (userId, imageId) => async dispatch => {
   try{
-    const {data} = await axios.get(`/api/image/${userId}/${imageId}`)
+    const {data} = await axios.delete(`/api/image/${userId}/${imageId}`)
     dispatch(removeImage(data))
   }catch(err){
     console.log(err)
