@@ -5,28 +5,28 @@ import {SingleImage} from '.'
 
 const mapDispatchToProps = function(dispatch){
   return{
-    getAllUsersImages: (id) => dispatch(receiveUsersImages(id))
+    getMyImages: (id) => dispatch(receiveUsersImages(id))
   }
 }
 
 const mapStateToProps = state => {
   return{
-    allUsersImages: state.image.usersImages,
+    allMyImages: state.image.usersImages,
     userId: state.user.id
   }
 }
 
 
-export const ViewAllUsersImages = props => {
+export const ViewMyImages = props => {
   useEffect(()=>{
-    if(props.getAllUsersImages){
-      props.getAllUsersImages(props.userId)
+    if(props.getMyImages){
+      props.getMyImages(props.userId)
     }
   }, [])
 
   return (
     <div className="AllUsersImages">
-      {props.allUsersImages && props.allUsersImages.map(imageObj =>
+      {props.allMyImages && props.allMyImages.map(imageObj =>
       (
         <SingleImage key={imageObj.id} imageObj={imageObj}/>
       ))}
@@ -35,4 +35,4 @@ export const ViewAllUsersImages = props => {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(ViewAllUsersImages)
+export default connect(mapStateToProps, mapDispatchToProps)(ViewMyImages)
