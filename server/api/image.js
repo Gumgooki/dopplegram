@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const {Image, User} =  require('../db/models')
 const multer = require('multer')
+const path = require( "path" )
 
 router.get('/', async(req, res, next) => {
   try {
@@ -65,6 +66,7 @@ const upload = multer({
 /// End of code block needed for image upload via Multer
 router.post('/:id', upload.single('imageData'), async (req, res, next) => {
   try{
+    console.log(req.file.path)
     const newImage = new Image({
       imageName: req.body.imageName,
       imageData: req.file.path.substr(7),
