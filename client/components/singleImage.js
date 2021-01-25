@@ -2,6 +2,7 @@ import React from 'react'
 import moment from 'moment'
 import {connect} from 'react-redux'
 import {deleteImage} from '../store/image'
+import {Link} from 'react-router-dom'
 
 const mapDispatchToProps = function(dispatch){
   return {
@@ -24,7 +25,15 @@ export const SingleImage = props => {
       <p>Uploaded {moment(imageObj.createdAt).fromNow()}</p>
       {/* TODO: this is harcoded right now; i would rather change this up so it can work no other ports/URLs */}
       <img src={`http://localhost:3000/${imageObj.imageData}`}/>
-      <p>Uploaded By {imageObj.user.email}</p>
+
+      {imageObj.userId === props.userId ?
+        <Link to='/my-images'>
+          <p>Uploaded By {imageObj.user.email}</p>
+        </Link> :
+        <Link to={'/user/'+ imageObj.userId}>
+          <p>Uploaded By {imageObj.user.email}</p>
+        </Link>
+      }
       <p>Comments:</p>
       {/*Can only access the delete button, if your userId is the same as the userId that is attached to the image. */}
       {imageObj.userId === props.userId &&
