@@ -25,7 +25,10 @@ export const SingleImage = props => {
       <img src={imageObj.imageData}/>
       <p>Uploaded By {imageObj.user.email}</p>
       <p>Comments:</p>
-      <button type="button" onClick={()=>props.destroyImage(props.userId, props.imageObj.id)}>Delete</button>
+      {/*Can only access the delete button, if your userId is the same as the userId that is attached to the image. */}
+      {imageObj.userId === props.userId &&
+        <button type="button" onClick={()=>props.destroyImage(props.userId, props.imageObj.id)}>Delete</button>
+      }
       {/* We'll put the comments here; will probably need to loop over */}
     </div>
   )
