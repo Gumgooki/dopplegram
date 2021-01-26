@@ -14,13 +14,15 @@ const googleConfig = {
 // configure the strategy with our config object, and write the function that passport will invoke after google sends us the user's profile and access token
 const strategy = new GoogleStrategy(googleConfig, function(token, refreshToken, profile, done){
   const googleId = profile.id
-  const name = profile.displayName
+  const userName = profile.displayName
   const email = profile.emails[0].value
+
+  console.log(profile)
 
   User.findOne({where: { googleId: googleId  }})
   .then(function (user) {
     if (!user) {
-      return User.create({ name, email, googleId })
+      return User.create({ userName, email, googleId })
         .then(function (user) {
           done(null, user);
         });
