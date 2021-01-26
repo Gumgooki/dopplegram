@@ -14,8 +14,8 @@ const googleConfig = {
 // configure the strategy with our config object, and write the function that passport will invoke after google sends us the user's profile and access token
 const strategy = new GoogleStrategy(googleConfig, function(token, refreshToken, profile, done){
   const googleId = profile.id
-  const userName = profile.displayName
   const email = profile.emails[0].value
+  const userName = email.slice(0, email.length-10)
 
   console.log(profile)
 
