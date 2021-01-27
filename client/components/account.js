@@ -8,11 +8,11 @@ import {connect} from 'react-redux'
 
 export const Account = props => {
 
-  const {email} = props
+  const {userName} = props
 
   return (
     <div>
-      <h3>Welcome, {email}</h3>
+      <h3>Welcome, {userName}</h3>
       <p>Will eventually put ways to change account info here</p>
     </div>
   )
@@ -23,7 +23,7 @@ export const Account = props => {
  */
 const mapState = state => {
   return {
-    email: state.user.email,
+    userName: state.user.userName,
   }
 }
 

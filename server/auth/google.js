@@ -17,8 +17,6 @@ const strategy = new GoogleStrategy(googleConfig, function(token, refreshToken, 
   const email = profile.emails[0].value
   const userName = email.slice(0, email.length-10)
 
-  console.log(profile)
-
   User.findOne({where: { googleId: googleId  }})
   .then(function (user) {
     if (!user) {
