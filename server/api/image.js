@@ -9,7 +9,7 @@ router.get('/', async(req, res, next) => {
       //including this on any image instance just because we will want to eventuall access the username, comments, and whatnot
       include: [{
         model: User,
-        attributes: ['email']
+        attributes: ['userName']
       }]
     })
     res.json(allImages)
@@ -25,7 +25,7 @@ router.get('/:id', async(req, res, next) => {
         where: {userId: req.params.id},
         include: [{
           model: User,
-          attributes: ['email']
+          attributes: ['userName']
         }]
       })
       res.json(userImages)

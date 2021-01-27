@@ -28,10 +28,10 @@ export const SingleImage = props => {
 
       {imageObj.userId === props.userId ?
         <Link to='/my-images'>
-          <p>Uploaded By {imageObj.user.email}</p>
+          <p>Uploaded By {imageObj.user.userName}</p>
         </Link> :
         <Link to={'/user/'+ imageObj.userId}>
-          <p>Uploaded By {imageObj.user.email}</p>
+          <p>Uploaded By {imageObj.user.userName}</p>
         </Link>
       }
       <p>Comments:</p>
