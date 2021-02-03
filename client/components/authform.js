@@ -31,7 +31,11 @@ const AuthForm = props => {
   const handleSubmit = (evt) => {
     evt.preventDefault()
     const formName = evt.target.name
-    props.sendAuth(state.userName, state.email, state.password, formName)
+    if(authFormValidation(state.userName) && authFormValidation(state.email)){
+      props.sendAuth(state.userName, state.email, state.password, formName)
+    }else{
+      console.error('please fill out the fields')
+    }
   }
 
   const handleChange = evt => {
