@@ -14,16 +14,17 @@ import {auth} from '../store'
 //     }
 // }
 
-const authFormValidation = (credentials) => {
-  console.log('actually in the function')
+const authFormValidation = (credentials, formName) => {
+  let isValid = true
   Object.keys(credentials).map((field) => {
-    console.log(credentials, field, ':', credentials[field], 'actually in the loop', 'length:', credentials[field].length)
-    if(credentials[field].length === 0){
-      console.log(credentials[field])
-      return false
+    if(!credentials[field].length || credentials[field] === ""){
+      isValid = false
+      if(formName === 'login' && field === 'userName'){
+        isValid = true
+      }
     }
   })
-  return true
+  return isValid
 }
 
 
@@ -43,7 +44,7 @@ const AuthForm = props => {
   const handleSubmit = (evt) => {
     evt.preventDefault()
     const formName = evt.target.name
-    if(authFormValidation(state)){
+    if(authFormValidation(state, formName)){
       props.sendAuth(state.userName, state.email, state.password, formName)
     }else{
       console.error('please fill out the fields')
