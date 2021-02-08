@@ -6,14 +6,6 @@ import {auth} from '../store'
 
 // VALIDATION FUNCTION
 
-// const authFormValidation = (credentials) => {
-//     if(credentials.length === 0){
-//       return false
-//     }else{
-//       return true
-//     }
-// }
-
 const authFormValidation = (credentials, formName) => {
   let isValid = true
   Object.keys(credentials).map((field) => {
@@ -21,6 +13,10 @@ const authFormValidation = (credentials, formName) => {
       isValid = false
       if(formName === 'login' && field === 'userName'){
         isValid = true
+      }
+    }else if(field === 'email'){
+      if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(credentials[field])){
+        isValid = false
       }
     }
   })
@@ -33,7 +29,6 @@ const authFormValidation = (credentials, formName) => {
  */
 
 const AuthForm = props => {
-  // const {name, displayName, handleSubmit, error} = props
   const {name, displayName, error} = props
   const [state, setState] = useState({
     userName: '',
