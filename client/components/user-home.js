@@ -10,9 +10,9 @@ import {receiveImages} from '../store'
  //TODO will want to probably remove the useEffects from here once i've set up components to viewBulkImages and view personal images
 export const UserHome = () => {
   return (
-    <div>
+    <>
       <ViewAllImages/>
-    </div>
+    </>
   )
 }
 

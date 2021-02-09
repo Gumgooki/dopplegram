@@ -63,6 +63,7 @@ const upload = multer({
   fileFilter: fileFilter
 })
 
+
 /// End of code block needed for image upload via Multer
 router.post('/:id', upload.single('imageData'), async (req, res, next) => {
   try{
