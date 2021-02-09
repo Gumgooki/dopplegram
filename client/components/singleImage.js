@@ -24,7 +24,9 @@ export const SingleImage = props => {
       <h1>{imageObj.imageName}</h1>
       <p>Uploaded {moment(imageObj.createdAt).fromNow()}</p>
       {/* TODO: this is harcoded right now; i would rather change this up so it can work no other ports/URLs */}
-      <img src={`http://localhost:3000/${imageObj.imageData}`}/>
+      <div className='imageContainer'>
+        <img src={`http://localhost:3000/${imageObj.imageData}`}/>
+      </div>
 
       {imageObj.userId === props.userId ?
         <Link to='/my-images'>

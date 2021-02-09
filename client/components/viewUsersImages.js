@@ -24,7 +24,7 @@ export const ViewMyImages = props => {
   }, [])
 
   return (
-    <div className="AllUsersImages">
+    <div className="AllImages AllUsersImages">
       {props.allUsersImages && props.allUsersImages.map(imageObj =>
       (
         <SingleImage key={imageObj.id} imageObj={imageObj}/>
