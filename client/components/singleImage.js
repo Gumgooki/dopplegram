@@ -20,7 +20,7 @@ export const SingleImage = props => {
   const {imageObj} = props
 
   return (
-    <div key = {imageObj.id}>
+    <div className="imageBox" key = {imageObj.id}>
       <h1>{imageObj.imageName}</h1>
       <p>Uploaded {moment(imageObj.createdAt).fromNow()}</p>
       {/* TODO: this is harcoded right now; i would rather change this up so it can work no other ports/URLs */}
