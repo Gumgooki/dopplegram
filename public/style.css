@@ -1,6 +1,7 @@
 body {
   margin: auto 0;
   background: #a6d8c9;
+  font-family: "Prompt", "sans-serif";
 }
 
 .application {
@@ -26,8 +27,6 @@ body {
 
 .AllImages {
   align-self: center;
-  padding: 2%;
-  background-color: #8cd5bb;
   margin: 4% 0;
 }
 
@@ -47,7 +46,12 @@ body {
   padding: 0 5%;
 }
 
+.imageBox a {
+  color: #44c596;
+}
+
 .navBlock {
-  background: #44c596;
+  background: #b8b8e8;
   color: #fefefc;
+  text-align: center;
 }
