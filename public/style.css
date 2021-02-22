@@ -1,3 +1,5 @@
+/* Boilerplate Content */
+
 body {
   margin: auto 0;
   background: #221d1c;
@@ -9,6 +11,7 @@ body {
   flex-direction: column;
 }
 
+/* Image Content */
 .imageContainer {
   width: 512px;
   height: 512px;
@@ -50,22 +53,40 @@ body {
   color: #4f969e;
 }
 
+.trashButton svg {
+  fill: #9b734f;
+}
+
+/* Navigation Content */
 .navBlock {
   background: #90593d;
   color: #fefefc;
   text-align: center;
 }
 
+.navContainer {
+  display: flex;
+  margin: 1%;
+}
+
+.mainNav {
+  width: 70%;
+  text-align: left;
+}
+
+.accountNav {
+  width: 30%;
+  text-align: right;
+}
+
 .mainNav a {
   text-decoration: none;
   color: #fefefc;
+  margin: 1%;
 }
 
 .accountNav a {
   text-decoration: none;
   color: #fefefc;
-}
-
-.trashButton svg {
-  fill: #9b734f;
+  margin: 1%;
 }

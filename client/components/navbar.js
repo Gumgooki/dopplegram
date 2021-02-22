@@ -9,7 +9,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
     <h1>DoppleGram</h1>
     <nav>
       {isLoggedIn ? (
-        <div>
+        <div className="navContainer">
           {/* The navbar will show these links after you log in */}
           <div className="mainNav">
             <Link to="/upload">Upload</Link>
