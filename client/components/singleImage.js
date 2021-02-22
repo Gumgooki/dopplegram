@@ -22,7 +22,12 @@ export const SingleImage = props => {
   return (
     <div className="imageBox" key = {imageObj.id}>
       {/*Can only access the delete button, if your userId is the same as the userId that is attached to the image. */}
-        {imageObj.userId === props.userId && <button type="button" onClick={()=>props.destroyImage(props.userId, props.imageObj.id)}>Delete</button>
+        {imageObj.userId === props.userId &&
+        <button className='trashButton' type="button" onClick={()=>props.destroyImage(props.userId, props.imageObj.id)}>
+          <svg width="22" height="22" viewBox="0 0 1024 1024">
+            <path d="M192 1024h640l64-704h-768zM640 128v-128h-256v128h-320v192l64-64h768l64 64v-192h-320zM576 128h-128v-64h128v64z" />
+          </svg>
+        </button>
       }
       <h1>{imageObj.imageName}</h1>
       <p>Uploaded {moment(imageObj.createdAt).fromNow()}</p>
