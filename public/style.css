@@ -4,6 +4,7 @@ body {
   margin: auto 0;
   background: #221d1c;
   font-family: "Prompt", "sans-serif";
+  color: #fefefc;
 }
 
 .application {
@@ -89,4 +90,23 @@ body {
   text-decoration: none;
   color: #fefefc;
   margin: 1%;
+}
+
+/* Account Page */
+.accoutnDiv {
+  align-self: center;
+  padding: 5% 0%;
+}
+
+/* Credential Forms */
+
+.credentialForm {
+  margin: 5% 30%;
+  padding: 3%;
+  background-color: #eec786;
+}
+
+.credentialField {
+  display: flex;
+  flex-direction: column;
 }

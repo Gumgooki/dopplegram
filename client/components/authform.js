@@ -52,23 +52,23 @@ const AuthForm = props => {
 
 
   return (
-    <div>
+    <div className="credentialForm">
       <form onSubmit={handleSubmit} name={name}>
         {name === 'signup' &&
-          <div>
+          <div className="credentialField">
             <label htmlFor="username">
               <small>Username</small>
             </label>
             <input name="userName" type="text" value={state.userName} onChange={handleChange} />
           </div>
         }
-        <div>
+        <div className="credentialField">
           <label htmlFor="email">
             <small>Email</small>
           </label>
           <input name="email" type="text" value={state.email} onChange={handleChange}/>
         </div>
-        <div>
+        <div className="credentialField">
           <label htmlFor="password">
             <small>Password</small>
           </label>
