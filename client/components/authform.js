@@ -79,7 +79,14 @@ const AuthForm = props => {
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
-      <a href="/auth/google">{displayName} with Google</a>
+      <a href="/auth/google">
+        <div className="google-btn">
+        <div className="google-icon-wrapper">
+          <img className="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+        </div>
+        <p className={name+'-btn-text btn-text'}>{displayName} with Google</p>
+      </div>
+      </a>
     </div>
   )
 }
