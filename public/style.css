@@ -92,6 +92,17 @@ body {
   margin: 1%;
 }
 
+.loginNav {
+  text-align: center;
+  margin: 1%;
+}
+
+.loginNav a {
+  text-decoration: none;
+  color: #fefefc;
+  margin: 1%;
+}
+
 /* Account Page */
 .accoutnDiv {
   align-self: center;
@@ -113,9 +124,24 @@ body {
   padding-bottom: 1rem;
 }
 
+.credentialField button {
+  background-color: #4f969e;
+  padding: 4%;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.6px;
+}
+
 .credentialField label {
   color: #221d1c;
   font-weight: 600;
+}
+
+.credentialField input {
+  padding: 2%;
 }
 
 .google-btn {

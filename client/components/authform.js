@@ -74,7 +74,7 @@ const AuthForm = props => {
           </label>
           <input name="password" type="password" value={state.password} onChange={handleChange}/>
         </div>
-        <div>
+        <div className="credentialField">
           <button type="submit">{displayName}</button>
         </div>
         {error && error.response && <div> {error.response.data} </div>}
