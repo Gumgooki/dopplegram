@@ -4,6 +4,7 @@ body {
   margin: auto 0;
   background: #221d1c;
   font-family: "Prompt", "sans-serif";
+  color: #fefefc;
 }
 
 .application {
@@ -89,4 +90,105 @@ body {
   text-decoration: none;
   color: #fefefc;
   margin: 1%;
+}
+
+.loginNav {
+  text-align: center;
+  margin: 1%;
+}
+
+.loginNav a {
+  text-decoration: none;
+  color: #fefefc;
+  margin: 1%;
+}
+
+/* Account Page */
+.accoutnDiv {
+  align-self: center;
+  padding: 5% 0%;
+}
+
+/* Credential Forms */
+
+.credentialForm {
+  margin: 5% 35%;
+  padding: 3%;
+  background-color: #eec786;
+  border-radius: 20px;
+}
+
+.credentialField {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 1rem;
+}
+
+.credentialField button {
+  background-color: #4f969e;
+  padding: 4%;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.6px;
+}
+
+.credentialField label {
+  color: #221d1c;
+  font-weight: 600;
+}
+
+.credentialField input {
+  padding: 2%;
+}
+
+.google-btn {
+  width: 210px;
+  height: 42px;
+  background-color: #4285f4;
+  border-radius: 2px;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
+  margin: 3% 0;
+}
+
+.google-btn:hover {
+  box-shadow: 0 0 6px #4285f4;
+}
+.google-btn:active {
+  background: #1669f2;
+}
+
+.google-icon-wrapper {
+  position: absolute;
+  margin-top: 1px;
+  margin-left: 1px;
+  width: 40px;
+  height: 40px;
+  border-radius: 2px;
+  background-color: #fff;
+}
+.google-icon {
+  position: absolute;
+  margin-top: 11px;
+  margin-left: 11px;
+  width: 18px;
+  height: 18px;
+}
+
+.signup-btn-text {
+  float: right;
+  margin: 10px 13px 0 0;
+}
+
+.login-btn-text {
+  float: right;
+  margin: 10px 22px 0 0;
+}
+
+.btn-text {
+  color: #fff;
+  font-size: 14px;
+  text-decoration: none;
 }

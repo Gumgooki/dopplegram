@@ -11,7 +11,7 @@ export const Account = props => {
   const {userName} = props
 
   return (
-    <div>
+    <div className='accountDiv'>
       <h3>Welcome, {userName}</h3>
       <p>Will eventually put ways to change account info here</p>
     </div>

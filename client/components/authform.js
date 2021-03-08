@@ -52,34 +52,41 @@ const AuthForm = props => {
 
 
   return (
-    <div>
+    <div className="credentialForm">
       <form onSubmit={handleSubmit} name={name}>
         {name === 'signup' &&
-          <div>
+          <div className="credentialField">
             <label htmlFor="username">
               <small>Username</small>
             </label>
             <input name="userName" type="text" value={state.userName} onChange={handleChange} />
           </div>
         }
-        <div>
+        <div className="credentialField">
           <label htmlFor="email">
             <small>Email</small>
           </label>
           <input name="email" type="text" value={state.email} onChange={handleChange}/>
         </div>
-        <div>
+        <div className="credentialField">
           <label htmlFor="password">
             <small>Password</small>
           </label>
           <input name="password" type="password" value={state.password} onChange={handleChange}/>
         </div>
-        <div>
+        <div className="credentialField">
           <button type="submit">{displayName}</button>
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
-      <a href="/auth/google">{displayName} with Google</a>
+      <a href="/auth/google">
+        <div className="google-btn">
+        <div className="google-icon-wrapper">
+          <img className="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+        </div>
+        <p className={name+'-btn-text btn-text'}>{displayName} with Google</p>
+      </div>
+      </a>
     </div>
   )
 }
