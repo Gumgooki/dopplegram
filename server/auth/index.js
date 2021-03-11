@@ -39,7 +39,7 @@ router.put('/change', (req, res, next) => {
     userName: req.body.credentials.userName
   },
   {
-    where: {id: req.body.user.id}
+    where: {id: req.body.id}
   }).then(
     res.status(201)
   )

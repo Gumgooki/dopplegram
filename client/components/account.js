@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
+import {editAccount} from '../store'
 
 
 // VALIDATION FUNCTION
@@ -19,9 +20,10 @@ const authFormValidation = (credentials) => {
 
 export const Account = props => {
 
-  const {userName} = props
+  const {userName, email, id} = props
   const [state, setState] = useState({
-    userName: '',
+    email: email,
+    userName: userName,
     password: ''
   })
 
@@ -29,14 +31,14 @@ export const Account = props => {
   //will probably break these components out into seperate form components (one for username and one for pasword)
   const handleSubmit = (evt) => {
     evt.preventDefault()
-    if(authFormValidation(state.password)){
-      // need the correct redux function
-      // props.sendAuth(state.password)
-    }else{
-      console.error('please fill out the field')
-    }
+    //just for testing
+    props.editAccount(state, id)
+    // if(authFormValidation(state)){
+    //   props.editAccount(state, id)
+    // }else{
+    //   console.error('please fill out the fields')
+    // }
   }
-
 
   const handleChange = evt => {
     setState({...state, [evt.target.name]: evt.target.value})
@@ -49,11 +51,25 @@ export const Account = props => {
       <div>
         <h3>Change Password</h3>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" value={state.password} onChange={handleChange}/>
-          <button type="submit">Change Password</button>
+          <div>
+            <label htmlFor="userName">
+              <small>Username</small>
+            </label>
+            <input name="userName" type="text" value={state.userName} onChange={handleChange}/>
+          </div>
+          <div>
+            <label htmlFor="email">
+              <small>Email</small>
+            </label>
+            <input name="email" type="text" value={state.email} onChange={handleChange}/>
+          </div>
+          <div>
+            <label htmlFor="password">
+              <small>Password</small>
+            </label>
+            <input name="password" type="password" value={state.password} onChange={handleChange}/>
+          </div>
+          <button type="submit">Change Credentials</button>
         </form>
       </div>
     </div>
@@ -66,8 +82,16 @@ export const Account = props => {
 const mapState = state => {
   return {
     userName: state.user.userName,
+    email: state.user.email,
+    id: state.user.id
   }
 }
 
-export default connect(mapState)(Account)
+const mapDispatch = function(dispatch){
+  return {
+    editAccount: (state, id) => dispatch(editAccount(state, id))
+  }
+}
+
+export default connect(mapState, mapDispatch)(Account)
 
