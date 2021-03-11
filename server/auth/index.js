@@ -32,6 +32,19 @@ router.post('/signup', (req, res, next) => {
     .catch(next);
 });
 
+router.put('/change', (req, res, next) => {
+  User.update({
+    email: req.body.credentials.email,
+    password: req.body.credentials.password,
+    userName: req.body.credentials.userName
+  },
+  {
+    where: {id: req.body.user.id}
+  }).then(
+    res.status(201)
+  )
+})
+
 router.delete('/logout', (req, res, next) => {
   req.logout();
   req.session.destroy()
