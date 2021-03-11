@@ -5,6 +5,7 @@ import history from '../history'
 
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
+const UPDATE_USER="UPDATE_USER"
 
 //initial state
 
@@ -18,6 +19,10 @@ const getUser = user => ({
 
 const removeUser = () => ({
   type: REMOVE_USER
+})
+
+const updateUser = () => ({
+  type: UPDATE_USER,
 })
 
 //thunk creators
@@ -53,6 +58,17 @@ export const logout = () => async dispatch => {
     dispatch(removeUser())
     history.push('/login')
   } catch(err) {
+    console.error(err)
+  }
+}
+
+
+export const editAccount = (credentials, id) => async dispatch => {
+  try{
+    await axios.put('/auth/change', credentials, id)
+    //may need to push the whole user object if we want to dispatch getUser; will need to test more
+    dispatch(getUser(id))
+  } catch(err){
     console.error(err)
   }
 }
