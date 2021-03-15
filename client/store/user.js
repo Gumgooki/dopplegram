@@ -65,9 +65,9 @@ export const logout = () => async dispatch => {
 
 export const editAccount = (credentials, id) => async dispatch => {
   try{
-    await axios.put('/auth/change', credentials, id)
+    const res = await axios.put('/auth/change', {credentials, id})
     //may need to push the whole user object if we want to dispatch getUser; will need to test more
-    dispatch(getUser(id))
+    dispatch(getUser(res.data))
   } catch(err){
     console.error(err)
   }
