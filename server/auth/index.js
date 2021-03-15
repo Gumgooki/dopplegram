@@ -33,6 +33,7 @@ router.post('/signup', (req, res, next) => {
 });
 
 router.put('/change', (req, res, next) => {
+  console.log('req, body', req.body)
   User.update({
     email: req.body.credentials.email,
     password: req.body.credentials.password,
@@ -40,9 +41,10 @@ router.put('/change', (req, res, next) => {
   },
   {
     where: {id: req.body.id}
-  }).then(
-    res.status(201)
-  )
+  }).then(user => {
+    console.log('user', user)
+    res.json(user)
+  })
 })
 
 router.delete('/logout', (req, res, next) => {
