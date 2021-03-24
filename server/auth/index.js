@@ -34,18 +34,6 @@ router.post('/signup', (req, res, next) => {
 
 router.put('/change', async (req, res, next) => {
   console.log('req, body', req.body)
-  // User.update({
-  //   email: req.body.credentials.email,
-  //   password: req.body.credentials.password,
-  //   userName: req.body.credentials.userName
-  // },
-  // {
-  //   where: {id: req.body.id}
-  // }).save().then(user => {
-  //   console.log('user', user)
-  //   res.json(user)
-  // })
-
   const updateUser = await User.findOne({
     where: {id: req.body.id}
   })
