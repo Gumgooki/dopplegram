@@ -23,7 +23,6 @@ export const Account = props => {
       {googleId ? (
         <>
           <ChangeUsername/>
-          <ChangeEmail/>
         </>
       ):(
        <>
