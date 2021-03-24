@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import {editAccount} from '../store'
 import ChangePassword from './changePassword'
+import ChangeUsername from './changeUsername'
 
 
 // VALIDATION FUNCTION
@@ -73,6 +74,7 @@ export const Account = props => {
           <button type="submit">Change Credentials</button>
         </form>
       </div>
+      <ChangeUsername/>
       <ChangePassword/>
     </div>
   )
