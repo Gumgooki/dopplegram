@@ -42,21 +42,18 @@ export const ChangeEmail = props => {
   }
 
   return(
-    <div className='accountDiv'>
-      <div>
-        <h3>Change Email</h3>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="email">
-              <small>Email</small>
-            </label>
-            <input name="email" type="text" value={state.email} onChange={handleChange}/>
-            <div className="text-danger">{state.errors.email}</div>
-          </div>
-          <button type="submit">Change Credentials</button>
-          </form>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <div className="credentialField">
+          <label htmlFor="email">
+            <small>Email</small>
+          </label>
+          <input name="email" type="text" value={state.email} onChange={handleChange}/>
+          <div className="text-danger">{state.errors.email}</div>
         </div>
-    </div>
+        <button className="changeCredentialSubmit" type="submit">Change Email</button>
+        </form>
+      </div>
   )
 }
 

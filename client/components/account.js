@@ -18,7 +18,7 @@ export const Account = props => {
   const {userName, googleId} = props
 
   return (
-    <div className='accountDiv'>
+    <div className='credentialForm'>
       <h3>Welcome, {userName}</h3>
       {googleId ? (
         <>
