@@ -45,27 +45,24 @@ export const ChangePassword = props => {
   }
 
   return(
-    <div className='accountDiv'>
-      <div>
-        <h3>Change Password</h3>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="password">
-              <small>Password</small>
-            </label>
-            <input name="password" type="password" value={state.password} onChange={handleChange}/>
-            <div className="text-danger">{state.errors.password}</div>
-          </div>
-          <div>
-            <label htmlFor="confirmPassword">
-              <small>Confirm Password</small>
-            </label>
-            <input name="confirmPassword" type="password" value={state.confirmPassword} onChange={handleChange}/>
-            <div className="text-danger">{state.errors.password}</div>
-          </div>
-          <button type="submit">Change Credentials</button>
-          </form>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <div className="credentialField">
+          <label htmlFor="password">
+            <small>Password</small>
+          </label>
+          <input name="password" type="password" value={state.password} onChange={handleChange}/>
+          <div className="text-danger">{state.errors.password}</div>
         </div>
+        <div className="credentialField">
+          <label htmlFor="confirmPassword">
+            <small>Confirm Password</small>
+          </label>
+          <input name="confirmPassword" type="password" value={state.confirmPassword} onChange={handleChange}/>
+          <div className="text-danger">{state.errors.password}</div>
+        </div>
+        <button className="changeCredentialSubmit" type="submit">Change Password</button>
+        </form>
     </div>
   )
 }

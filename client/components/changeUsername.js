@@ -42,21 +42,18 @@ export const ChangeUsername = props => {
   }
 
   return(
-    <div className='accountDiv'>
-      <div>
-        <h3>Change Username</h3>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="userName">
-              <small>Username</small>
-            </label>
-            <input name="userName" type="text" value={state.userName} onChange={handleChange}/>
-            <div className="text-danger">{state.errors.userName}</div>
-          </div>
-          <button type="submit">Change Credentials</button>
-          </form>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <div className="credentialField">
+          <label htmlFor="userName">
+            <small>Username</small>
+          </label>
+          <input name="userName" type="text" value={state.userName} onChange={handleChange}/>
+          <div className="text-danger">{state.errors.userName}</div>
         </div>
-    </div>
+        <button className="changeCredentialSubmit" type="submit">Change Username</button>
+        </form>
+      </div>
   )
 }
 
