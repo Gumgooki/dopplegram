@@ -53,18 +53,19 @@ class AddImage extends React.Component {
     // })
   }
 
-  storeImage(e, imageData, id){
-
+  storeImage(imageData, id){
     this.props.createNewImage(imageData, id).then((data) => {
       if(data.data.success){
         this.setState({
-          multerImage: DefaultImg
+          multerImage: DefaultImg,
+          imageData: {}
         })
       }
     }).catch((err)=> {
       console.error(err)
       this.setState({
-        multerImage: DefaultImg
+        multerImage: DefaultImg,
+        imageData: {}
       })
     })
   }
@@ -74,7 +75,7 @@ class AddImage extends React.Component {
       <div>
         <input type="file" onChange={(e)=>this.uploadImage(e, "multer")}/>
         <img src={this.state.multerImage}/>
-        <button type="button"onClick={(e) => this.props.createNewImage(e, this.state.imageData, this.props.userId)}>Submit Image</button>
+        <button type="button" onClick={(e)=>this.storeImage(this.state.imageData, this.props.userId)}>Submit Image</button>
       </div>
     )
   }
