@@ -22,7 +22,8 @@ class AddImage extends React.Component {
     super(props)
 
     this.state = {
-      multerImage: DefaultImg
+      multerImage: DefaultImg,
+      imageData: {},
     }
   }
 
@@ -35,10 +36,26 @@ class AddImage extends React.Component {
     //store a readable instance of the image being uploaded using multer
 
     this.setState({
-      multerImage: URL.createObjectURL(e.target.files[0])
+      multerImage: URL.createObjectURL(e.target.files[0]),
+      imageData: imageData
     })
+    // this.props.createNewImage(imageData, this.props.userId).then((data) => {
+    //   if(data.data.success){
+    //     this.setState({
+    //       multerImage: DefaultImg
+    //     })
+    //   }
+    // }).catch((err)=> {
+    //   console.error(err)
+    //   this.setState({
+    //     multerImage: DefaultImg
+    //   })
+    // })
+  }
 
-    this.props.createNewImage(imageData, this.props.userId).then((data) => {
+  storeImage(e, imageData, id){
+
+    this.props.createNewImage(imageData, id).then((data) => {
       if(data.data.success){
         this.setState({
           multerImage: DefaultImg
@@ -51,11 +68,13 @@ class AddImage extends React.Component {
       })
     })
   }
+
   render(){
     return(
       <div>
         <input type="file" onChange={(e)=>this.uploadImage(e, "multer")}/>
         <img src={this.state.multerImage}/>
+        <button type="button"onClick={(e) => this.props.createNewImage(e, this.state.imageData, this.props.userId)}>Submit Image</button>
       </div>
     )
   }
