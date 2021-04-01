@@ -213,3 +213,23 @@ body {
 #photoUpload {
   display: none;
 }
+
+.uploader {
+  display: flex;
+  flex-direction: column;
+}
+
+.uploadButton {
+  background-color: #4f969e;
+  padding: 2%;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 2em 0;
+}
+
+.imagePlaceholder {
+  padding: 40%;
+}

@@ -15,14 +15,12 @@ const mapStateToProps = state => {
   }
 }
 
-const DefaultImg = "https://www.stevenstaekwondo.com/wp-content/uploads/2017/04/default-image-620x600.jpg"
-
 class AddImage extends React.Component {
   constructor(props){
     super(props)
 
     this.state = {
-      multerImage: DefaultImg,
+      multerImage: 0,
       imageData: {},
     }
   }
@@ -39,32 +37,20 @@ class AddImage extends React.Component {
       multerImage: URL.createObjectURL(e.target.files[0]),
       imageData: imageData
     })
-    // this.props.createNewImage(imageData, this.props.userId).then((data) => {
-    //   if(data.data.success){
-    //     this.setState({
-    //       multerImage: DefaultImg
-    //     })
-    //   }
-    // }).catch((err)=> {
-    //   console.error(err)
-    //   this.setState({
-    //     multerImage: DefaultImg
-    //   })
-    // })
   }
 
   storeImage(imageData, id){
     this.props.createNewImage(imageData, id).then((data) => {
       if(data.data.success){
         this.setState({
-          multerImage: DefaultImg,
+          multerImage: 0,
           imageData: {}
         })
       }
     }).catch((err)=> {
       console.error(err)
       this.setState({
-        multerImage: DefaultImg,
+        multerImage: 0,
         imageData: {}
       })
     })
@@ -72,15 +58,16 @@ class AddImage extends React.Component {
 
   render(){
     return(
-      <div className="AllImages">
+      <div className="AllImages uploader">
         <input id="photoUpload" type="file" onChange={(e)=>this.uploadImage(e, "multer")}/>
-        <label for="photoUpload">
+        <label htmlFor="photoUpload">
           <div className="imageContainer">
-              <img src={this.state.multerImage}/>
-            {/* <img src={this.state.multerImage}/> */}
+              {this.state.multerImage === 0 ?
+              <p className="imagePlaceholder">CLICK HERE TO UPLOAD</p> :
+              <img src={this.state.multerImage}/>}
           </div>
         </label>
-        <button className="changeCredentialSubmit" type="button" onClick={()=>this.storeImage(this.state.imageData, this.props.userId)}>Submit Image</button>
+        <button className="uploadButton" type="button" onClick={()=>this.storeImage(this.state.imageData, this.props.userId)}>Submit Image</button>
       </div>
     )
   }
