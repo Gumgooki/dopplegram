@@ -72,10 +72,15 @@ class AddImage extends React.Component {
 
   render(){
     return(
-      <div>
-        <input type="file" onChange={(e)=>this.uploadImage(e, "multer")}/>
-        <img src={this.state.multerImage}/>
-        <button type="button" onClick={(e)=>this.storeImage(this.state.imageData, this.props.userId)}>Submit Image</button>
+      <div className="AllImages">
+        <input id="photoUpload" type="file" onChange={(e)=>this.uploadImage(e, "multer")}/>
+        <label for="photoUpload">
+          <div className="imageContainer">
+              <img src={this.state.multerImage}/>
+            {/* <img src={this.state.multerImage}/> */}
+          </div>
+        </label>
+        <button className="changeCredentialSubmit" type="button" onClick={()=>this.storeImage(this.state.imageData, this.props.userId)}>Submit Image</button>
       </div>
     )
   }
