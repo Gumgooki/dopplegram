@@ -94,7 +94,7 @@ class AddImage extends React.Component {
           </div>
         </label>
         <label htmlFor="imageDescription">Write something about your photo!</label>
-        <input
+        <textarea
           name="imageDescription"
           id="imageDescription"
           type='text'
