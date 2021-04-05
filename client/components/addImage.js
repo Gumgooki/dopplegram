@@ -42,6 +42,7 @@ class AddImage extends React.Component {
   }
 
   storeImage(imageData, id){
+    imageData.append("imageDescription", this.state.imageDescription)
     this.props.createNewImage(imageData, id).then((data) => {
       if(data.data.success){
         this.setState({
