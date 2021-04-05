@@ -233,3 +233,7 @@ body {
 .imagePlaceholder {
   padding: 40%;
 }
+
+#imageDescription {
+  height: 70px;
+}

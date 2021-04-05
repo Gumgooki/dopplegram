@@ -67,11 +67,11 @@ const upload = multer({
 /// End of code block needed for image upload via Multer
 router.post('/:id', upload.single('imageData'), async (req, res, next) => {
   try{
-    console.log(req.file.path)
     const newImage = new Image({
       imageName: req.body.imageName,
       imageData: req.file.path.substr(7),
-      userId: req.params.id
+      userId: req.params.id,
+      imageDescription: req.body.imageDescription
     })
 
     await newImage.save()

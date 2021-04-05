@@ -10,6 +10,10 @@ const Image = db.define('image', {
   imageData: {
     type: Sequelize.STRING,
     required: true
+  },
+  imageDescription: {
+    type: Sequelize.STRING,
+    required: true
   }
 })
 
