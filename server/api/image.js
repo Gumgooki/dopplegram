@@ -1,7 +1,6 @@
 const router = require('express').Router()
-const {Image, User} =  require('../db/models')
+const {Image, User, Comment} =  require('../db/models')
 const multer = require('multer')
-const path = require( "path" )
 
 router.get('/', async(req, res, next) => {
   try {
@@ -26,6 +25,8 @@ router.get('/:id', async(req, res, next) => {
         include: [{
           model: User,
           attributes: ['userName']
+        },{
+          model: Comment,
         }]
       })
       res.json(userImages)
