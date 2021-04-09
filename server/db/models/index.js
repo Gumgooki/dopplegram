@@ -21,6 +21,7 @@ Image.belongsTo(User)
 
 Image.hasMany(Comment)
 Comment.belongsTo(User)
+User.hasMany(Comment)
 
 module.exports = {
   User,

@@ -34,7 +34,7 @@ export const uploadComment = (commentData, imageId, userId) => async dispatch =>
 export default function dummyReducer(state = defaultComments, action){
   switch(action.type){
     case CREATE_COMMENT:
-      return {...state, comments: [...state.comments, action.payload]}
+      return {...state, comments: [...state.comment, action.payload]}
     default:
       return state
   }

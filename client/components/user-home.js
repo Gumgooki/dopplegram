@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {ViewAllImages} from './index'
+import {ViewAllImages, AddComment} from './index'
 import {receiveImages} from '../store'
 
 /**
@@ -12,6 +12,7 @@ export const UserHome = () => {
   return (
     <>
       <ViewAllImages/>
+      <AddComment/>
     </>
   )
 }

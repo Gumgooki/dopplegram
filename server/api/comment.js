@@ -20,9 +20,10 @@ router.get('/:imageId/', async(req, res, next) => {
 
 router.post('/:imageId/:userId/', async(req, res, next) => {
   try{
-    const userId = req.body.userId
-    const imageId = req.body.imageId
-    const newComment = req.body.Comment
+    console.log(req.body)
+    const userId = req.params.userId
+    const imageId = req.params.imageId
+    const newComment = req.body.comment
     const comment = await Comment.create(newComment)
     const image = await Image.findOne({
       where: {
@@ -34,10 +35,12 @@ router.post('/:imageId/:userId/', async(req, res, next) => {
         id: userId
       }
     })
-    await user.addComment(comment)
-    await comment.setImage(image)
+    // await user.addComment(comment)
+    // await comment.setImage(image)
     res.json(image)
   } catch(err){
     next(err)
   }
 })
+
+module.exports = router
