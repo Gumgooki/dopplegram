@@ -1,5 +1,6 @@
 const User = require('./user')
 const Image = require('./image')
+const Comment = require('./comment')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -18,7 +19,12 @@ const Image = require('./image')
 User.hasMany(Image)
 Image.belongsTo(User)
 
+Image.hasMany(Comment)
+Comment.belongsTo(User)
+User.hasMany(Comment)
+
 module.exports = {
   User,
   Image,
+  Comment
 }
