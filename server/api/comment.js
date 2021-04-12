@@ -27,7 +27,7 @@ router.post('/:imageId/:userId/', async(req, res, next) => {
     const image = await Image.findOne({
       where: {
         id: imageId
-      }
+      },
     })
     const user = await User.findOne({
       where: {
@@ -36,7 +36,7 @@ router.post('/:imageId/:userId/', async(req, res, next) => {
     })
     await user.addComment(comment)
     await comment.setImage(image)
-    res.json(comment)
+    res.json(image)
   } catch(err){
     next(err)
   }

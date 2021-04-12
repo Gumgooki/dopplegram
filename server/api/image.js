@@ -26,7 +26,7 @@ router.get('/:id', async(req, res, next) => {
           model: User,
           attributes: ['userName']
         },{
-          model: Comment,
+          Comment,
         }]
       })
       res.json(userImages)
@@ -93,6 +93,9 @@ router.post('/:id', upload.single('imageData'), async (req, res, next) => {
     next(err)
   }
 })
+
+
+
 
 router.delete('/:userId/:imageId', async (req, res, next) => {
   //need to be able to delete an image

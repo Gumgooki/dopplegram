@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
-import {uploadComment} from '../store/comment'
+import {uploadComment} from '../store/image'
 
 
 //this is just going to be for testing purposes for now; once i know this works, i'll refactor this whole slice

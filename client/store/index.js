@@ -26,6 +26,6 @@ const store = createStore(
 export default store
 export * from './user'
 export * from './image'
-export * from './comment'
+// export * from './comment'
 
 //make sure to use connect and dispatch methods to actually be able to use this store correctly.

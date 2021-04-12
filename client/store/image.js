@@ -7,6 +7,7 @@ const CREATE_IMAGE = 'CREATE_IMAGE'
 const GET_ALL_IMAGES = 'GET_ALL_IMAGES'
 const GET_USERS_IMAGES = 'GET_USERS_IMAGES'
 const DELETE_USER_IMAGE = 'DELETE_USER_IMAGE'
+const CREATE_COMMENT = 'CREATE_COMMENT'
 
 //initial state
 
@@ -36,6 +37,12 @@ const removeImage = (deletedImage, id) => ({
   delImgId: id
 })
 
+const createComment = (commentedImage, imageId) => ({
+  type: CREATE_COMMENT,
+  payload: commentedImage,
+  imageId
+})
+
 // thunk creators
 export const uploadImage = (imageData, userId) => async dispatch => {
   try {
@@ -45,6 +52,16 @@ export const uploadImage = (imageData, userId) => async dispatch => {
     return response
   } catch(err) {
     console.error(err)
+  }
+}
+
+export const uploadComment = (commentData, imageId, userId) => async dispatch => {
+  try{
+    let {data} = await axios.post(`/api/comment/${imageId}/${userId}`, commentData)
+    console.log('in the thunk', data)
+    dispatch(createComment(data, imageId))
+  } catch(err){
+    console.log(err)
   }
 }
 
@@ -91,6 +108,16 @@ export default function dummyReducer (state = defaultImage, action){
           ...state,
           usersImages: [...state.usersImages.filter((image) => image.id !== action.delImgId)],
           allImages: [...state.allImages.filter((image) => image.id !== action.delImgId)]
+        }
+      case CREATE_COMMENT:
+        return {
+          ...state,
+          allImages: [...state.allImages.map(image => {
+            if(image.id === action.imageId){
+              image = action.payload
+            }
+            return image
+          })]
         }
     default:
       return state
