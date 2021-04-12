@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import moment from 'moment'
 import {connect} from 'react-redux'
 import {deleteImage} from '../store/image'
 import {Link} from 'react-router-dom'
+import {AddComment} from './'
+import { map } from 'lodash'
 
 const mapDispatchToProps = function(dispatch){
   return {
@@ -18,6 +20,10 @@ const mapStateToProps = state => {
 
 export const SingleImage = props => {
   const {imageObj} = props
+
+  useEffect(()=> {
+    const {imageObj} = props
+  })
 
   return (
     <div className="imageBox" key = {imageObj.id}>
@@ -46,6 +52,12 @@ export const SingleImage = props => {
       }
       <p>Comments:</p>
       {/* We'll put the comments here; will probably need to loop over */}
+      <div>
+        {imageObj.comments.map(comment => {
+          return (<div key={comment.id}>{comment.commentText}</div>)
+        })}
+      </div>
+      <AddComment imageId={imageObj.id}/>
     </div>
   )
 }

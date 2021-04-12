@@ -58,7 +58,6 @@ export const uploadImage = (imageData, userId) => async dispatch => {
 export const uploadComment = (commentData, imageId, userId) => async dispatch => {
   try{
     let {data} = await axios.post(`/api/comment/${imageId}/${userId}`, commentData)
-    console.log('in the thunk', data)
     dispatch(createComment(data, imageId))
   } catch(err){
     console.log(err)
@@ -113,17 +112,13 @@ export default function dummyReducer (state = defaultImage, action){
         return {
           ...state,
           allImages: [...state.allImages.map(image => {
-            console.log('outside the loop', action.payload)
             if(image.id === action.imageId){
-              console.log('inside the loop', action.payload)
               image.comments = [...image.comments, action.payload]
             }
             return image
           })],
           usersImages: [...state.usersImages.map(image => {
-            console.log('outside the loop', action.payload)
             if(image.id === action.imageId){
-              console.log('inside the loop', action.payload)
               image.comments = [...image.comments, action.payload]
             }
             return image

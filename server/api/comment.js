@@ -36,7 +36,18 @@ router.post('/:imageId/:userId/', async(req, res, next) => {
     })
     await user.addComment(comment)
     await comment.setImage(image)
-    res.json(comment)
+
+    const sendComment = await Comment.findOne({
+      where: {
+        id: comment.id
+      },
+      include: [{
+        model: User,
+        attributes: ['userName']
+      }]
+    })
+    console.log('sendComment', sendComment)
+    res.json(sendComment)
   } catch(err){
     next(err)
   }
