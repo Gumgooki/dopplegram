@@ -26,7 +26,7 @@ export const AddComment = props => {
   const handleSubmit = (evt) => {
     evt.preventDefault()
     console.log(state.comment)
-    props.createNewComment(state.comment, 1, userId)
+    props.createNewComment(state, 1, userId)
   }
 
   const handleChange = evt => {
