@@ -20,7 +20,7 @@ router.get('/:imageId/', async(req, res, next) => {
 
 router.post('/:imageId/:userId/', async(req, res, next) => {
   try{
-    console.log('in the API', req.body.comment)
+    console.log('in the API', req.params.imageId)
     const userId = req.params.userId
     const imageId = req.params.imageId
     const newComment = req.body.comment
@@ -35,8 +35,8 @@ router.post('/:imageId/:userId/', async(req, res, next) => {
         id: userId
       }
     })
-    // await user.addComment(comment)
-    // await comment.setImage(image)
+    await user.addComment(comment)
+    await comment.setImage(image)
     res.json(comment)
   } catch(err){
     next(err)
