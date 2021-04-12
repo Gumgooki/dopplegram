@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
-import {uploadComment} from '../store/comment'
+import {uploadComment} from '../store/image'
 
 
 //this is just going to be for testing purposes for now; once i know this works, i'll refactor this whole slice
@@ -26,7 +26,7 @@ export const AddComment = props => {
   const handleSubmit = (evt) => {
     evt.preventDefault()
     console.log(state.comment)
-    props.createNewComment(state.comment, 1, userId)
+    props.createNewComment(state, props.imageId, userId)
   }
 
   const handleChange = evt => {
@@ -38,7 +38,7 @@ export const AddComment = props => {
       <form onSubmit={handleSubmit}>
       <div className="credentialField">
           <label htmlFor="comment">
-            <small>Email</small>
+            <small>Add Comment</small>
           </label>
           <input name="comment" type="text" value={state.comment} onChange={handleChange}/>
           <div className="text-danger">{state.errors.comment}</div>

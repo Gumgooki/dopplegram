@@ -19,6 +19,7 @@ const Comment = require('./comment')
 User.hasMany(Image)
 Image.belongsTo(User)
 
+Comment.belongsTo(Image)
 Image.hasMany(Comment)
 Comment.belongsTo(User)
 User.hasMany(Comment)

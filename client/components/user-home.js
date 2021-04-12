@@ -12,7 +12,6 @@ export const UserHome = () => {
   return (
     <>
       <ViewAllImages/>
-      <AddComment/>
     </>
   )
 }
