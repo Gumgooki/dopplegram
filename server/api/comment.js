@@ -20,7 +20,6 @@ router.get('/:imageId/', async(req, res, next) => {
 
 router.post('/:imageId/:userId/', async(req, res, next) => {
   try{
-    console.log('in the API', req.params.imageId)
     const userId = req.params.userId
     const imageId = req.params.imageId
     const newComment = req.body.comment

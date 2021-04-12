@@ -21,7 +21,6 @@ const createComment = (comment) => ({
 
 export const uploadComment = (commentData, imageId, userId) => async dispatch => {
   try{
-    console.log('in the thunk', commentData)
     let response = await axios.post(`/api/comment/${imageId}/${userId}`, commentData)
     console.log('in the thunk', response.data)
     dispatch(createComment(commentData))
