@@ -9,7 +9,13 @@ router.get('/', async(req, res, next) => {
       include: [{
         model: User,
         attributes: ['userName']
-      }, Comment]
+      },{
+        model: Comment,
+        include:[{
+          model: User,
+          attributes: ['userName']
+        }]
+      }]
     })
     res.json(allImages)
   } catch(err){
@@ -26,7 +32,11 @@ router.get('/:id', async(req, res, next) => {
           model: User,
           attributes: ['userName']
         },{
-          Comment,
+          model: Comment,
+          include:[{
+            model: User,
+            attributes: ['userName']
+          }]
         }]
       })
       res.json(userImages)

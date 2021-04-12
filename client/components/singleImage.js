@@ -54,7 +54,7 @@ export const SingleImage = props => {
       {/* We'll put the comments here; will probably need to loop over */}
       <div>
         {imageObj.comments.map(comment => {
-          return (<div key={comment.id}>{comment.commentText}</div>)
+          return (<div key={comment.id}><span>{comment.user.userName}: </span>{comment.commentText}</div>)
         })}
       </div>
       <AddComment imageId={imageObj.id}/>
