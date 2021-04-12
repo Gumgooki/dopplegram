@@ -36,7 +36,7 @@ router.post('/:imageId/:userId/', async(req, res, next) => {
     })
     await user.addComment(comment)
     await comment.setImage(image)
-    res.json(image)
+    res.json(comment)
   } catch(err){
     next(err)
   }

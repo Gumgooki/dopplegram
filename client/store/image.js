@@ -37,9 +37,9 @@ const removeImage = (deletedImage, id) => ({
   delImgId: id
 })
 
-const createComment = (commentedImage, imageId) => ({
+const createComment = (comment, imageId) => ({
   type: CREATE_COMMENT,
-  payload: commentedImage,
+  payload: comment,
   imageId
 })
 
@@ -113,11 +113,21 @@ export default function dummyReducer (state = defaultImage, action){
         return {
           ...state,
           allImages: [...state.allImages.map(image => {
+            console.log('outside the loop', action.payload)
             if(image.id === action.imageId){
-              image = action.payload
+              console.log('inside the loop', action.payload)
+              image.comments = [...image.comments, action.payload]
             }
             return image
-          })]
+          })],
+          usersImages: [...state.usersImages.map(image => {
+            console.log('outside the loop', action.payload)
+            if(image.id === action.imageId){
+              console.log('inside the loop', action.payload)
+              image.comments = [...image.comments, action.payload]
+            }
+            return image
+          })],
         }
     default:
       return state
