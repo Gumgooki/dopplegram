@@ -46,7 +46,6 @@ router.post('/:imageId/:userId/', async(req, res, next) => {
         attributes: ['userName']
       }]
     })
-    console.log('sendComment', sendComment)
     res.json(sendComment)
   } catch(err){
     next(err)

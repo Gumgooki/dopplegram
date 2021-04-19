@@ -11,7 +11,10 @@ const CREATE_COMMENT = 'CREATE_COMMENT'
 
 //initial state
 
-const defaultImage = {}
+const defaultImage = {
+  usersImages: [],
+  allImages: []
+}
 
 //action creators
 

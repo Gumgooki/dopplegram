@@ -4,7 +4,6 @@ import {connect} from 'react-redux'
 import {deleteImage} from '../store/image'
 import {Link} from 'react-router-dom'
 import {AddComment} from './'
-import { map } from 'lodash'
 
 const mapDispatchToProps = function(dispatch){
   return {
