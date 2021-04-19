@@ -20,9 +20,6 @@ const mapStateToProps = state => {
 export const SingleImage = props => {
   const {imageObj} = props
 
-  useEffect(()=> {
-    const {imageObj} = props
-  })
 
   return (
     <div className="imageBox" key = {imageObj.id}>

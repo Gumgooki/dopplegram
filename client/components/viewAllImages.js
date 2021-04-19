@@ -27,6 +27,7 @@ export const ViewAllImages = props =>{
       {props.allImages && props.allImages.map(imageObj =>
         (
           <SingleImage key={imageObj.id} imageObj={imageObj} imageComments={imageObj.comments}/>
+          //this is weird; but sending down the imageObj.comments in addition to imageObj actully solved my issue of not having the comments refresh on a submit. I think it's because the comments were so nested. It's strange because nothing in SingleImage accesses the imageComments
         )
       )}
     </div>
