@@ -93,6 +93,12 @@ router.post('/:id', upload.single('imageData'), async (req, res, next) => {
       include: [{
         model: User,
         attributes: ['email']
+      },{
+        model: Comment,
+        include:[{
+          model: User,
+          attributes: ['userName']
+        }]
       }]
     })
     res.status(200).json({

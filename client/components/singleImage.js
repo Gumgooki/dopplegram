@@ -4,7 +4,6 @@ import {connect} from 'react-redux'
 import {deleteImage} from '../store/image'
 import {Link} from 'react-router-dom'
 import {AddComment} from './'
-import { map } from 'lodash'
 
 const mapDispatchToProps = function(dispatch){
   return {
@@ -21,9 +20,27 @@ const mapStateToProps = state => {
 export const SingleImage = props => {
   const {imageObj} = props
 
-  useEffect(()=> {
-    const {imageObj} = props
-  })
+
+  // const handleExpand = (evt) => {
+  //   evt.preventDefault()
+
+  // }
+  //TODO: this doesn't actually do anything yet; i'm working on this funciton as of 04/19/21
+  const handleComments = (maxIndex) =>  {
+    imageObj.comments.map((comment, currentIndex) => {
+      if(currentIndex <= maxIndex){
+        return (
+          <div key={comment.id}>
+            <span>{comment.user.userName}: </span>{comment.commentText}
+          </div>
+        )
+      }else{
+        return(
+          <button type="submit" onClick={() => handleComments(10)}>expand comments</button>
+        )
+      }
+    })
+  }
 
   return (
     <div className="imageBox" key = {imageObj.id}>
@@ -56,6 +73,10 @@ export const SingleImage = props => {
         {imageObj.comments.map(comment => {
           return (<div key={comment.id}><span>{comment.user.userName}: </span>{comment.commentText}</div>)
         })}
+      </div>
+      <div>
+        <h3>this is the tsting one</h3>
+        <button onClick={handleComments}>Click me</button>
       </div>
       <AddComment imageId={imageObj.id}/>
     </div>

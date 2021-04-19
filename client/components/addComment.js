@@ -27,6 +27,7 @@ export const AddComment = props => {
     evt.preventDefault()
     console.log(state.comment)
     props.createNewComment(state, props.imageId, userId)
+    setState({...state, comment: ''})
   }
 
   const handleChange = evt => {
