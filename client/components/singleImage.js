@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import moment from 'moment'
 import {connect} from 'react-redux'
 import {deleteImage} from '../store/image'
 import {Link} from 'react-router-dom'
-import {AddComment} from './'
+import {AddComment, CommentList} from './'
 
 const mapDispatchToProps = function(dispatch){
   return {
@@ -19,28 +19,19 @@ const mapStateToProps = state => {
 
 export const SingleImage = props => {
   const {imageObj} = props
+  const [expandCollapse, setExpandCollapse] = useState({
+    expanded: false,
+    bigList: false,
+  })
+
+  useEffect(() => {
+    if(imageObj.comments.length > 3){
+      setExpandCollapse({...expandCollapse, bigList: true})
+    }
+  }, [imageObj.comments])
 
 
-  // const handleExpand = (evt) => {
-  //   evt.preventDefault()
 
-  // }
-  //TODO: this doesn't actually do anything yet; i'm working on this funciton as of 04/19/21
-  const handleComments = (maxIndex) =>  {
-    imageObj.comments.map((comment, currentIndex) => {
-      if(currentIndex <= maxIndex){
-        return (
-          <div key={comment.id}>
-            <span>{comment.user.userName}: </span>{comment.commentText}
-          </div>
-        )
-      }else{
-        return(
-          <button type="submit" onClick={() => handleComments(10)}>expand comments</button>
-        )
-      }
-    })
-  }
 
   return (
     <div className="imageBox" key = {imageObj.id}>
@@ -69,15 +60,47 @@ export const SingleImage = props => {
       }
       <p>Comments:</p>
       {/* We'll put the comments here; will probably need to loop over */}
-      <div>
+      {/* <div>
         {imageObj.comments.map(comment => {
-          return (<div key={comment.id}><span>{comment.user.userName}: </span>{comment.commentText}</div>)
+          if(imageObj.comments.length <= 3){
+            return (<div key={comment.id}>
+              <span>{comment.user.userName}: </span>
+              {comment.commentText}
+              </div>)
+          }
+          else{
+            return(<div key={comment.id}>
+              <span>{comment.user.userName}: </span>
+              {comment.commentText}
+              </div>)
+          }
         })}
-      </div>
-      <div>
-        <h3>this is the tsting one</h3>
-        <button onClick={handleComments}>Click me</button>
-      </div>
+      </div> */}
+      {/* <div>
+        {!expandCollapse.bigList || expandCollapse.expanded &&
+          imageObj.comments.map(comment => {
+            return(<div key={comment.id}>
+              <span>{comment.user.userName}: </span>
+              {comment.commentText}
+              </div>)
+          })
+        }
+        {expandCollapse.bigList &&
+          imageObj.comments.map((comment, index) => {
+            if(index < 3){
+              return(<div key={comment.id}>
+                <span>{comment.user.userName}: </span>
+                {comment.commentText}
+                </div>)
+            }
+          })
+        }
+        {expandCollapse.bigList && !expandCollapse.expanded &&
+            <button type="submit" onClick={setExpandCollapse({...expandCollapse, expanded: true})}>Click here to see more comments</button>
+        }
+      </div> */}
+      <CommentList comments={imageObj.comments}/>
+      <button onClick={() => setExpandCollapse({...expandCollapse, expanded: !expandCollapse.expanded })} type="submit">Expand Comments</button>
       <AddComment imageId={imageObj.id}/>
     </div>
   )
