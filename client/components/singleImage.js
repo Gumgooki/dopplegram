@@ -63,8 +63,8 @@ export const SingleImage = props => {
           expanded: !expandCollapse.expanded })}
         type="submit">
         {expandCollapse.expanded ?
-        <>Collapse Comments</> :
-        <> Expand Comments</>}
+        <>Collapse {imageObj.comments.length - 3} Comments</> :
+        <> Expand {imageObj.comments.length - 3} Comments</>}
       </button>}
       <AddComment imageId={imageObj.id}/>
     </div>
