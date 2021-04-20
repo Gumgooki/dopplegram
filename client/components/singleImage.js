@@ -21,16 +21,7 @@ export const SingleImage = props => {
   const {imageObj} = props
   const [expandCollapse, setExpandCollapse] = useState({
     expanded: false,
-    bigList: false,
   })
-
-  useEffect(() => {
-    if(imageObj.comments.length > 3){
-      setExpandCollapse({...expandCollapse, bigList: true})
-    }
-  }, [imageObj.comments])
-
-
 
 
   return (
@@ -59,47 +50,7 @@ export const SingleImage = props => {
         </Link>
       }
       <p>Comments:</p>
-      {/* We'll put the comments here; will probably need to loop over */}
-      {/* <div>
-        {imageObj.comments.map(comment => {
-          if(imageObj.comments.length <= 3){
-            return (<div key={comment.id}>
-              <span>{comment.user.userName}: </span>
-              {comment.commentText}
-              </div>)
-          }
-          else{
-            return(<div key={comment.id}>
-              <span>{comment.user.userName}: </span>
-              {comment.commentText}
-              </div>)
-          }
-        })}
-      </div> */}
-      {/* <div>
-        {!expandCollapse.bigList || expandCollapse.expanded &&
-          imageObj.comments.map(comment => {
-            return(<div key={comment.id}>
-              <span>{comment.user.userName}: </span>
-              {comment.commentText}
-              </div>)
-          })
-        }
-        {expandCollapse.bigList &&
-          imageObj.comments.map((comment, index) => {
-            if(index < 3){
-              return(<div key={comment.id}>
-                <span>{comment.user.userName}: </span>
-                {comment.commentText}
-                </div>)
-            }
-          })
-        }
-        {expandCollapse.bigList && !expandCollapse.expanded &&
-            <button type="submit" onClick={setExpandCollapse({...expandCollapse, expanded: true})}>Click here to see more comments</button>
-        }
-      </div> */}
-      <CommentList comments={imageObj.comments}/>
+      <CommentList comments={imageObj.comments} expanded={expandCollapse.expanded}/>
       <button onClick={() => setExpandCollapse({...expandCollapse, expanded: !expandCollapse.expanded })} type="submit">Expand Comments</button>
       <AddComment imageId={imageObj.id}/>
     </div>
