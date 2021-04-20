@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import moment from 'moment'
 import {connect} from 'react-redux'
 import {deleteImage} from '../store/image'
 import {Link} from 'react-router-dom'
-import {AddComment} from './'
+import {AddComment, CommentList} from './'
 
 const mapDispatchToProps = function(dispatch){
   return {
@@ -19,28 +19,16 @@ const mapStateToProps = state => {
 
 export const SingleImage = props => {
   const {imageObj} = props
+  const [expandCollapse, setExpandCollapse] = useState({
+    expanded: false,
+    moreThanThree: false
+  })
 
-
-  // const handleExpand = (evt) => {
-  //   evt.preventDefault()
-
-  // }
-  //TODO: this doesn't actually do anything yet; i'm working on this funciton as of 04/19/21
-  const handleComments = (maxIndex) =>  {
-    imageObj.comments.map((comment, currentIndex) => {
-      if(currentIndex <= maxIndex){
-        return (
-          <div key={comment.id}>
-            <span>{comment.user.userName}: </span>{comment.commentText}
-          </div>
-        )
-      }else{
-        return(
-          <button type="submit" onClick={() => handleComments(10)}>expand comments</button>
-        )
-      }
-    })
-  }
+  useEffect(()=>{
+    if(imageObj.comments.length > 3){
+      setExpandCollapse({...expandCollapse, moreThanThree: true})
+    }
+  }, [imageObj.comments])
 
   return (
     <div className="imageBox" key = {imageObj.id}>
@@ -68,16 +56,16 @@ export const SingleImage = props => {
         </Link>
       }
       <p>Comments:</p>
-      {/* We'll put the comments here; will probably need to loop over */}
-      <div>
-        {imageObj.comments.map(comment => {
-          return (<div key={comment.id}><span>{comment.user.userName}: </span>{comment.commentText}</div>)
-        })}
-      </div>
-      <div>
-        <h3>this is the tsting one</h3>
-        <button onClick={handleComments}>Click me</button>
-      </div>
+      <CommentList comments={imageObj.comments} expanded={expandCollapse.expanded}/>
+      {expandCollapse.moreThanThree && <button onClick={
+        () => setExpandCollapse({
+          ...expandCollapse,
+          expanded: !expandCollapse.expanded })}
+        type="submit">
+        {expandCollapse.expanded ?
+        <>Collapse {imageObj.comments.length - 3} Comments</> :
+        <> Expand {imageObj.comments.length - 3} Comments</>}
+      </button>}
       <AddComment imageId={imageObj.id}/>
     </div>
   )
