@@ -62,6 +62,8 @@ body {
 
 .imageBox a {
   color: #4f969e;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 .trashButton svg {
@@ -259,7 +261,6 @@ body {
 
 .expandCommentsBut {
   padding: 2%;
-  background-color: #4f969e;
   border: none;
   font-size: 0.9rem;
   font-weight: 600;
@@ -268,7 +269,6 @@ body {
 }
 
 .addCommentsBut {
-  background-color: #4f969e;
   padding: 2%;
   border: none;
   font-size: 0.9rem;

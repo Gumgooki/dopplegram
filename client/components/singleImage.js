@@ -28,8 +28,8 @@ export const SingleImage = props => {
   })
 
   const [boxColor, setBoxColor] = useState({
-    expandComments: '#4f969e',
-    expandSubmit: '#4f969e'
+    expandComments: '#90593d',
+    expandSubmit: '#90593d'
   })
 
   useEffect(()=>{
@@ -40,18 +40,18 @@ export const SingleImage = props => {
 
   useEffect(() => {
     if(expandCommentSubmit.extended){
-      setBoxColor({...boxColor, expandSubmit: '#68bec7'})
+      setBoxColor({...boxColor, expandSubmit: '#9b734f'})
     }else if (!expandCommentSubmit.extended){
-      setBoxColor({...boxColor, expandSubmit: '#4f969e'})
+      setBoxColor({...boxColor, expandSubmit: '#90593d'})
     }
   }, [expandCommentSubmit.extended])
 
 
   useEffect(() => {
     if(expandCollapse.expanded){
-      setBoxColor({...boxColor, expandComments: '#68bec7'})
+      setBoxColor({...boxColor, expandComments: '#9b734f'})
     }else if (!expandCollapse.expanded){
-      setBoxColor({...boxColor, expandComments: '#4f969e'})
+      setBoxColor({...boxColor, expandComments: '#90593d'})
     }
   }, [expandCollapse.expanded])
 

@@ -1,5 +1,5 @@
 import React from 'react'
-
+import {Link} from 'react-router-dom'
 
 
 export const CommentList = props => {
@@ -11,8 +11,11 @@ export const CommentList = props => {
         {comments.map(comment => {
           return(
             <div key={comment.id}>
-              <span>{comment.user.userName}: </span>
-              {comment.commentText}
+              <span>
+                <Link to= {'/user/' + comment.userId}>{comment.user.userName}:
+                </Link>
+              </span>
+              {' '}{comment.commentText}
             </div>
           )
         })}
@@ -26,8 +29,11 @@ export const CommentList = props => {
           if(index < 3){
             return(
               <div key={comment.id}>
-                <span>{comment.user.userName}: </span>
-                {comment.commentText}
+                <span>
+                  <Link to= {'/user/' + comment.userId}>{comment.user.userName}:
+                  </Link>
+                </span>
+                {' '}{comment.commentText}
               </div>
             )
           }
