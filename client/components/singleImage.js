@@ -32,6 +32,8 @@ export const SingleImage = props => {
 
   return (
     <div className="imageBox" key = {imageObj.id}>
+
+      <div className="imageBoxTop">
       {/*Can only access the delete button, if your userId is the same as the userId that is attached to the image. */}
         {imageObj.userId === props.userId &&
         <button className='trashButton' type="button" onClick={()=>props.destroyImage(props.userId, props.imageObj.id)}>
@@ -40,21 +42,24 @@ export const SingleImage = props => {
           </svg>
         </button>
       }
-      <h1>{imageObj.imageName}</h1>
-      <p>Uploaded {moment(imageObj.createdAt).fromNow()}</p>
+
+      <p>Uploaded {moment(imageObj.createdAt).fromNow()}{' '}
+        {imageObj.userId === props.userId ?
+          <Link to='/my-images'>
+            <>by {imageObj.user.userName}</>
+          </Link> :
+          <Link to={'/user/'+ imageObj.userId}>
+            <>by {imageObj.user.userName}</>
+          </Link>
+        }
+      </p>
+      </div>
+
       {/* TODO: this is harcoded right now; i would rather change this up so it can work no other ports/URLs */}
       <div className='imageContainer'>
         <img src={`http://localhost:3000/${imageObj.imageData}`}/>
       </div>
 
-      {imageObj.userId === props.userId ?
-        <Link to='/my-images'>
-          <p>Uploaded By {imageObj.user.userName}</p>
-        </Link> :
-        <Link to={'/user/'+ imageObj.userId}>
-          <p>Uploaded By {imageObj.user.userName}</p>
-        </Link>
-      }
       <p>Comments:</p>
       <CommentList comments={imageObj.comments} expanded={expandCollapse.expanded}/>
       {expandCollapse.moreThanThree && <button onClick={

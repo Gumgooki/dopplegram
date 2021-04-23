@@ -19,6 +19,7 @@ body {
   text-align: center;
   border-top: solid 1px #dedede;
   border-bottom: solid 1px #dedede;
+  background: #dab679;
 }
 
 .imageContainer img {
@@ -40,6 +41,15 @@ body {
   background: #eec786;
   color: #221d1c;
   border-radius: 2%;
+}
+
+.imageBoxTop {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: space-around;
+  justify-content: center;
+  align-items: center;
 }
 
 .imageBox h1 {
