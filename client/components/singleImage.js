@@ -23,6 +23,9 @@ export const SingleImage = props => {
     expanded: false,
     moreThanThree: false
   })
+  const [expandCommentSubmit, setExpandCommentSubmit] = useState({
+    extended: false
+  })
 
   useEffect(()=>{
     if(imageObj.comments.length > 3){
@@ -61,7 +64,8 @@ export const SingleImage = props => {
       </div>
 
       <p>Comments:</p>
-      <CommentList comments={imageObj.comments} expanded={expandCollapse.expanded}/>
+      <CommentList imageId={imageObj.id}comments={imageObj.comments} expanded={expandCollapse.expanded}/>
+      <div className="imageButtons">
       {expandCollapse.moreThanThree && <button onClick={
         () => setExpandCollapse({
           ...expandCollapse,
@@ -71,7 +75,15 @@ export const SingleImage = props => {
         <>Collapse {imageObj.comments.length - 3} Comments</> :
         <> Expand {imageObj.comments.length - 3} Comments</>}
       </button>}
-      <AddComment imageId={imageObj.id}/>
+
+      <button type="submit" onClick={() => setExpandCommentSubmit({
+        expanded: !expandCommentSubmit.expanded
+      })}>Post a comment</button>
+
+      {expandCommentSubmit.expanded &&
+        <AddComment imageId={imageObj.id}/>
+      }
+      </div>
     </div>
   )
 }

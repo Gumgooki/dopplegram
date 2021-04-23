@@ -1,12 +1,13 @@
 import React from 'react'
 
 
+
 export const CommentList = props => {
   const {comments, expanded} = props
 
   if(expanded){
     return (
-      <div>
+      <div className="commentBlock">
         {comments.map(comment => {
           return(
             <div key={comment.id}>
@@ -20,7 +21,7 @@ export const CommentList = props => {
   }
   else{
     return (
-      <div>
+      <div className="commentBlock">
         {comments.map((comment, index) => {
           if(index < 3){
             return(

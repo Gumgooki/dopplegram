@@ -247,3 +247,7 @@ body {
 #imageDescription {
   height: 70px;
 }
+
+.commentBlock {
+  padding: 0 8%;
+}

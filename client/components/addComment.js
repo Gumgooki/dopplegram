@@ -44,7 +44,8 @@ export const AddComment = props => {
           <input name="comment" type="text" value={state.comment} onChange={handleChange}/>
           <div className="text-danger">{state.errors.comment}</div>
         </div>
-        <button className="changeCredentialSubmit" type="submit">Add Comment</button>
+        {/* commented out to test if it submits with enter; it seems to work and i kinda like it more tbh */}
+        {/* <button className="changeCredentialSubmit" type="submit">Add Comment</button> */}
       </form>
     </div>
   )
