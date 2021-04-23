@@ -251,3 +251,28 @@ body {
 .commentBlock {
   padding: 0 8%;
 }
+
+.imageButtons {
+  display: flex;
+  flex-direction: column;
+}
+
+.expandCommentsBut {
+  padding: 2%;
+  background-color: #4f969e;
+  border: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 1% 0;
+}
+
+.addCommentsBut {
+  background-color: #4f969e;
+  padding: 2%;
+  border: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 1% 0 3% 0;
+}

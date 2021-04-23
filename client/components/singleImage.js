@@ -27,11 +27,34 @@ export const SingleImage = props => {
     extended: false
   })
 
+  const [boxColor, setBoxColor] = useState({
+    expandComments: '#4f969e',
+    expandSubmit: '#4f969e'
+  })
+
   useEffect(()=>{
     if(imageObj.comments.length > 3){
       setExpandCollapse({...expandCollapse, moreThanThree: true})
     }
   }, [imageObj.comments])
+
+  useEffect(() => {
+    if(expandCommentSubmit.extended){
+      setBoxColor({...boxColor, expandSubmit: '#68bec7'})
+    }else if (!expandCommentSubmit.extended){
+      setBoxColor({...boxColor, expandSubmit: '#4f969e'})
+    }
+  }, [expandCommentSubmit.extended])
+
+
+  useEffect(() => {
+    if(expandCollapse.expanded){
+      setBoxColor({...boxColor, expandComments: '#68bec7'})
+    }else if (!expandCollapse.expanded){
+      setBoxColor({...boxColor, expandComments: '#4f969e'})
+    }
+  }, [expandCollapse.expanded])
+
 
   return (
     <div className="imageBox" key = {imageObj.id}>
@@ -66,23 +89,23 @@ export const SingleImage = props => {
       <p>Comments:</p>
       <CommentList imageId={imageObj.id}comments={imageObj.comments} expanded={expandCollapse.expanded}/>
       <div className="imageButtons">
-      {expandCollapse.moreThanThree && <button onClick={
-        () => setExpandCollapse({
-          ...expandCollapse,
-          expanded: !expandCollapse.expanded })}
-        type="submit">
-        {expandCollapse.expanded ?
-        <>Collapse {imageObj.comments.length - 3} Comments</> :
-        <> Expand {imageObj.comments.length - 3} Comments</>}
-      </button>}
+        {expandCollapse.moreThanThree && <button className="expandCommentsBut" onClick={
+          () => setExpandCollapse({
+            ...expandCollapse,
+            expanded: !expandCollapse.expanded })}
+          type="submit" style={{backgroundColor: boxColor.expandComments}}>
+          {expandCollapse.expanded ?
+          <>Collapse {imageObj.comments.length - 3} Comments</> :
+          <> Expand {imageObj.comments.length - 3} Comments</>}
+        </button>}
 
-      <button type="submit" onClick={() => setExpandCommentSubmit({
-        expanded: !expandCommentSubmit.expanded
-      })}>Post a comment</button>
+        <button className="addCommentsBut" type="submit" onClick={() => setExpandCommentSubmit({
+          extended: !expandCommentSubmit.extended
+        })} style={{backgroundColor: boxColor.expandSubmit}}>Post a comment</button>
 
-      {expandCommentSubmit.expanded &&
-        <AddComment imageId={imageObj.id}/>
-      }
+        {expandCommentSubmit.extended &&
+          <AddComment imageId={imageObj.id}/>
+        }
       </div>
     </div>
   )

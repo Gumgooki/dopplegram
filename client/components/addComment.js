@@ -38,9 +38,6 @@ export const AddComment = props => {
     <div>
       <form onSubmit={handleSubmit}>
       <div className="credentialField">
-          <label htmlFor="comment">
-            <small>Add Comment</small>
-          </label>
           <input name="comment" type="text" value={state.comment} onChange={handleChange}/>
           <div className="text-danger">{state.errors.comment}</div>
         </div>
