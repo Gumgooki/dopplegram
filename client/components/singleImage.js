@@ -23,6 +23,14 @@ export const SingleImage = props => {
     expanded: false,
     moreThanThree: false
   })
+  const [expandCommentSubmit, setExpandCommentSubmit] = useState({
+    extended: false
+  })
+
+  const [boxColor, setBoxColor] = useState({
+    expandComments: '#90593d',
+    expandSubmit: '#90593d'
+  })
 
   useEffect(()=>{
     if(imageObj.comments.length > 3){
@@ -30,8 +38,28 @@ export const SingleImage = props => {
     }
   }, [imageObj.comments])
 
+  useEffect(() => {
+    if(expandCommentSubmit.extended){
+      setBoxColor({...boxColor, expandSubmit: '#9b734f'})
+    }else if (!expandCommentSubmit.extended){
+      setBoxColor({...boxColor, expandSubmit: '#90593d'})
+    }
+  }, [expandCommentSubmit.extended])
+
+
+  useEffect(() => {
+    if(expandCollapse.expanded){
+      setBoxColor({...boxColor, expandComments: '#9b734f'})
+    }else if (!expandCollapse.expanded){
+      setBoxColor({...boxColor, expandComments: '#90593d'})
+    }
+  }, [expandCollapse.expanded])
+
+
   return (
     <div className="imageBox" key = {imageObj.id}>
+
+      <div className="imageBoxTop">
       {/*Can only access the delete button, if your userId is the same as the userId that is attached to the image. */}
         {imageObj.userId === props.userId &&
         <button className='trashButton' type="button" onClick={()=>props.destroyImage(props.userId, props.imageObj.id)}>
@@ -40,33 +68,45 @@ export const SingleImage = props => {
           </svg>
         </button>
       }
-      <h1>{imageObj.imageName}</h1>
-      <p>Uploaded {moment(imageObj.createdAt).fromNow()}</p>
+
+      <p>Uploaded {moment(imageObj.createdAt).fromNow()}{' '}
+        {imageObj.userId === props.userId ?
+          <Link to='/my-images'>
+            <>by {imageObj.user.userName}</>
+          </Link> :
+          <Link to={'/user/'+ imageObj.userId}>
+            <>by {imageObj.user.userName}</>
+          </Link>
+        }
+      </p>
+      </div>
+
       {/* TODO: this is harcoded right now; i would rather change this up so it can work no other ports/URLs */}
       <div className='imageContainer'>
         <img src={`http://localhost:3000/${imageObj.imageData}`}/>
       </div>
 
-      {imageObj.userId === props.userId ?
-        <Link to='/my-images'>
-          <p>Uploaded By {imageObj.user.userName}</p>
-        </Link> :
-        <Link to={'/user/'+ imageObj.userId}>
-          <p>Uploaded By {imageObj.user.userName}</p>
-        </Link>
-      }
       <p>Comments:</p>
-      <CommentList comments={imageObj.comments} expanded={expandCollapse.expanded}/>
-      {expandCollapse.moreThanThree && <button onClick={
-        () => setExpandCollapse({
-          ...expandCollapse,
-          expanded: !expandCollapse.expanded })}
-        type="submit">
-        {expandCollapse.expanded ?
-        <>Collapse {imageObj.comments.length - 3} Comments</> :
-        <> Expand {imageObj.comments.length - 3} Comments</>}
-      </button>}
-      <AddComment imageId={imageObj.id}/>
+      <CommentList imageId={imageObj.id}comments={imageObj.comments} expanded={expandCollapse.expanded}/>
+      <div className="imageButtons">
+        {expandCollapse.moreThanThree && <button className="expandCommentsBut" onClick={
+          () => setExpandCollapse({
+            ...expandCollapse,
+            expanded: !expandCollapse.expanded })}
+          type="submit" style={{backgroundColor: boxColor.expandComments}}>
+          {expandCollapse.expanded ?
+          <>Collapse {imageObj.comments.length - 3} Comments</> :
+          <> Expand {imageObj.comments.length - 3} Comments</>}
+        </button>}
+
+        <button className="addCommentsBut" type="submit" onClick={() => setExpandCommentSubmit({
+          extended: !expandCommentSubmit.extended
+        })} style={{backgroundColor: boxColor.expandSubmit}}>Post a comment</button>
+
+        {expandCommentSubmit.extended &&
+          <AddComment imageId={imageObj.id}/>
+        }
+      </div>
     </div>
   )
 }

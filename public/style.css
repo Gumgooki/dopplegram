@@ -19,6 +19,7 @@ body {
   text-align: center;
   border-top: solid 1px #dedede;
   border-bottom: solid 1px #dedede;
+  background: #dab679;
 }
 
 .imageContainer img {
@@ -42,6 +43,15 @@ body {
   border-radius: 2%;
 }
 
+.imageBoxTop {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: space-around;
+  justify-content: center;
+  align-items: center;
+}
+
 .imageBox h1 {
   padding: 0 5%;
 }
@@ -52,6 +62,8 @@ body {
 
 .imageBox a {
   color: #4f969e;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 .trashButton svg {
@@ -236,4 +248,31 @@ body {
 
 #imageDescription {
   height: 70px;
+}
+
+.commentBlock {
+  padding: 0 8%;
+}
+
+.imageButtons {
+  display: flex;
+  flex-direction: column;
+}
+
+.expandCommentsBut {
+  padding: 2%;
+  border: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 1% 0;
+}
+
+.addCommentsBut {
+  padding: 2%;
+  border: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 1% 0 3% 0;
 }
