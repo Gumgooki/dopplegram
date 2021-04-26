@@ -281,3 +281,9 @@ body {
   align-self: center;
   font-size: 2.5rem;
 }
+
+.imageDescription {
+  width: 500px;
+  padding: 5%;
+  font-style: italic;
+}

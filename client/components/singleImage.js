@@ -85,7 +85,7 @@ export const SingleImage = props => {
       <div className='imageContainer'>
         <img src={`http://localhost:3000/${imageObj.imageData}`}/>
       </div>
-
+      <div className="imageDescription">{imageObj.imageDescription}</div>
       <p>Comments:</p>
       <CommentList imageId={imageObj.id}comments={imageObj.comments} expanded={expandCollapse.expanded}/>
       <div className="imageButtons">
