@@ -24,12 +24,18 @@ export const ViewMyImages = props => {
   }, [])
 
   return (
+    <>
+    {props.allUsersImages[0] &&
+    <h1 className="pageHeader">Viewing {props.allUsersImages[0].user.userName}'s uploads</h1>
+    }
+
     <div className="AllImages AllUsersImages">
       {props.allUsersImages && props.allUsersImages.map(imageObj =>
       (
         <SingleImage key={imageObj.id} imageObj={imageObj} imageComments={imageObj.comments}/>
       ))}
     </div>
+    </>
   )
 }
 
