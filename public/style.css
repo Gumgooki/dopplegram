@@ -276,3 +276,8 @@ body {
   color: #fff;
   margin: 1% 0 3% 0;
 }
+
+.pageHeader {
+  align-self: center;
+  font-size: 2.5rem;
+}
