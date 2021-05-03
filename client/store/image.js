@@ -8,6 +8,7 @@ const GET_ALL_IMAGES = 'GET_ALL_IMAGES'
 const GET_USERS_IMAGES = 'GET_USERS_IMAGES'
 const DELETE_USER_IMAGE = 'DELETE_USER_IMAGE'
 const CREATE_COMMENT = 'CREATE_COMMENT'
+const CREATE_LIKE = 'CREATE_LIKE'
 
 //initial state
 
@@ -46,6 +47,12 @@ const createComment = (comment, imageId) => ({
   imageId
 })
 
+const createLike = (like, imageId) => ({
+  type: CREATE_LIKE,
+  payload: like,
+  imageId
+})
+
 // thunk creators
 export const uploadImage = (imageData, userId) => async dispatch => {
   try {
@@ -63,6 +70,15 @@ export const uploadComment = (commentData, imageId, userId) => async dispatch =>
     let {data} = await axios.post(`/api/comment/${imageId}/${userId}`, commentData)
     dispatch(createComment(data, imageId))
   } catch(err){
+    console.log(err)
+  }
+}
+
+export const uploadLike = (like, imageId, userId) => async dispatch => {
+  try{
+    let {data} = await axios.post(`/api/like/${imageId}/${userId}`, like)
+    dispatch(createLike(data, imageId))
+  }catch(err){
     console.log(err)
   }
 }
