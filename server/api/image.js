@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Image, User, Comment} =  require('../db/models')
+const {Image, User, Comment, Like} =  require('../db/models')
 const multer = require('multer')
 
 router.get('/', async(req, res, next) => {
@@ -99,6 +99,9 @@ router.post('/:id', upload.single('imageData'), async (req, res, next) => {
           model: User,
           attributes: ['userName']
         }]
+      },{
+        model: Like,
+        attributes: ['like']
       }]
     })
     res.status(200).json({

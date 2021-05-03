@@ -3,7 +3,7 @@ import moment from 'moment'
 import {connect} from 'react-redux'
 import {deleteImage} from '../store/image'
 import {Link} from 'react-router-dom'
-import {AddComment, CommentList} from './'
+import {AddComment, CommentList, AddLike} from './'
 
 const mapDispatchToProps = function(dispatch){
   return {
@@ -106,6 +106,7 @@ export const SingleImage = props => {
         {expandCommentSubmit.extended &&
           <AddComment imageId={imageObj.id}/>
         }
+        <AddLike imageId={imageObj.id}/>
       </div>
     </div>
   )
