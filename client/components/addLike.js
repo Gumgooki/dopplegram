@@ -17,18 +17,16 @@ const mapStateToProps = state => {
 
 export const AddLike = props => {
   const {userId} = props
-  const {state, setState} = useState({
-    like: false
-  })
+  const [like, setLike] = useState(false)
 
 
   //this isn't working
   const handleSubmit = (evt) => {
     evt.preventDefault()
-    setState({like: !state.like})
-    console.log(state.like)
-    if(state.like === true){
-      props.createNewLike(state.like, props.imageId, userId)
+    setLike(!like)
+    console.log(like)
+    if(like === true){
+      props.createNewLike(like, props.imageId, userId)
     }
   }
 
