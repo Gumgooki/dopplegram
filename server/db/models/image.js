@@ -14,6 +14,13 @@ const Image = db.define('image', {
   imageDescription: {
     type: Sequelize.STRING,
     required: true
+  },
+  totalLikes: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0,
+    validate: {
+      min: 0
+    }
   }
 })
 

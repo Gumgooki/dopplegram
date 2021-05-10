@@ -20,10 +20,12 @@ Like.afterUpdate(async like => {
       'imageId',
       [Sequelize.fn('count', Sequelize.col('imageId')), 'totalLikes']
     ],
-    group:['like.imageId']
+    group:['like.imageId'],
+    raw: true
   })
   const {totalLikes} = data
-  image.likes = totalLikes
+  console.log('the total like', totalLikes)
+  image.totalLikes = totalLikes
   await image.save()
 })
 
