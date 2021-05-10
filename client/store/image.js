@@ -76,7 +76,7 @@ export const uploadComment = (commentData, imageId, userId) => async dispatch =>
 
 export const uploadLike = (like, imageId, userId) => async dispatch => {
   try{
-    let {data} = await axios.post(`/api/like/${imageId}/${userId}`, like)
+    let {data} = await axios.post(`/api/like/${imageId}/${userId}`, {'like':like})
     dispatch(createLike(data, imageId))
   }catch(err){
     console.log(err)

@@ -1,3 +1,5 @@
+const { route } = require('./like');
+
 const router = require('express').Router();
 
 router.use('/users', require('./users')); // matches all requests to /api/users/
@@ -5,6 +7,7 @@ router.use('/puppies', require('./puppies')); // matches all requests to  /api/p
 router.use('/kittens', require('./kittens')); // matches all requests to  /api/kittens/
 router.use('/image', require('./image')) //matches all request to /api/image/
 router.use('/comment', require('./comment'))
+router.use('/like', require('./like'))
 
 module.exports = router;
 

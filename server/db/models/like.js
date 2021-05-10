@@ -11,7 +11,7 @@ const Like = db.define('like', {
 
 //enabling a way to get an accurate count of how many likes an image has without crawling the whole database everytime we render
 Like.afterUpdate(async like => {
-  const image = await Image.findById(like.imageId)
+  const image = await Image.findByPk(like.imageId)
   const [data] = await Like.findAll({
     where: {
       imageId: like.imageId
@@ -19,10 +19,13 @@ Like.afterUpdate(async like => {
     attributes: [
       'imageId',
       [Sequelize.fn('count', Sequelize.col('imageId')), 'totalLikes']
-    ]
+    ],
+    group:['like.imageId'],
+    raw: true
   })
   const {totalLikes} = data
-  image.likes = totalLikes
+  console.log('the total like', totalLikes)
+  image.totalLikes = totalLikes
   await image.save()
 })
 

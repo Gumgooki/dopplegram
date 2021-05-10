@@ -1,5 +1,5 @@
 const router =  require('express').Router()
-const {Image, Comment, User, Like, Image} = require('../db/models')
+const {Image, User, Like} = require('../db/models')
 
 router.post('/:imageId/:userId/', async(req, res, next) => {
   try{
@@ -7,16 +7,18 @@ router.post('/:imageId/:userId/', async(req, res, next) => {
     const imageId = req.params.imageId
     const newLike = req.body.like
     const like = await Like.create({like: newLike})
-    const image = await Image.findOne({
-      where: {
-        id: imageId
-      },
-    })
-    const user = await User.findOnce({
-      where: {
-        id: userId
-      }
-    })
+    // const image = await Image.findOne({
+    //   where: {
+    //     id: imageId
+    //   },
+    // })
+    // const user = await User.findOne({
+    //   where: {
+    //     id: userId
+    //   }
+    // })
+    const image = await Image.findByPk(imageId)
+    const user = await User.findByPk(userId)
     await image.addLike(like)
     await user.addLike(like)
     await like.setImage(image)

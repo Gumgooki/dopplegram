@@ -28,6 +28,7 @@ User.hasMany(Comment)
 Like.belongsTo(Image)
 Image.hasMany(Like)
 Like.belongsTo(User)
+User.hasMany(Like)
 
 module.exports = {
   User,
