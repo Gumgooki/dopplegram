@@ -19,7 +19,8 @@ Like.afterUpdate(async like => {
     attributes: [
       'imageId',
       [Sequelize.fn('count', Sequelize.col('imageId')), 'totalLikes']
-    ]
+    ],
+    group:['like.imageId']
   })
   const {totalLikes} = data
   image.likes = totalLikes
