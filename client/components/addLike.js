@@ -1,11 +1,12 @@
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
-import {uploadLike} from '../store/image'
+import {uploadLike, deleteLike} from '../store/image'
 
 
 const mapDispatchToProps = function(dispatch){
   return{
-    createNewLike: (payload, imageId, userId) => dispatch(uploadLike(payload, imageId, userId))
+    createNewLike: (like, imageId, userId) => dispatch(uploadLike(like, imageId, userId)),
+    deleteLike: (imageId, userId) => dispatch(deleteLike(imageId, userId))
   }
 }
 
@@ -23,17 +24,19 @@ export const AddLike = props => {
   //this isn't working
   const handleSubmit = (evt) => {
     evt.preventDefault()
-    setLike(!like)
-    console.log(like)
-    if(like === true){
+    if(like === false){
+      setLike(true)
       props.createNewLike(like, props.imageId, userId)
+    } else{
+      setLike(false)
+      props.deleteLike(props.imageId, userId)
     }
   }
 
   return(
     <div>
       <button type="submit" onClick={handleSubmit}>
-        Like Image
+        {like ? <>Unlike Image</> : <>Like Image</>}
       </button>
     </div>
   )

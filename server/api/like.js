@@ -33,4 +33,21 @@ router.post('/:imageId/:userId/', async(req, res, next) => {
   }
 })
 
+
+router.delete('/:imageId/:userId', async(req, res, next) => {
+  const userId = req.params.userId
+  const imageId = req.params.imageId
+  try{
+    const delLiked = await Like.destroy({
+      where: {
+        userId: userId,
+        imageId: imageId
+      }
+    })
+    res.status(201).json(delLiked)
+  } catch(err){
+    next(err)
+  }
+})
+
 module.exports = router
