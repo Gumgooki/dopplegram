@@ -5,7 +5,7 @@ import {uploadLike, deleteLike} from '../store/image'
 
 const mapDispatchToProps = function(dispatch){
   return{
-    createNewLike: (imageId, userId) => dispatch(uploadLike(imageId, userId)),
+    createNewLike: (like, imageId, userId) => dispatch(uploadLike(like, imageId, userId)),
     deleteLike: (imageId, userId) => dispatch(deleteLike(imageId, userId))
   }
 }
