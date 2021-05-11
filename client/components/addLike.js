@@ -1,11 +1,12 @@
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
-import {uploadLike} from '../store/image'
+import {uploadLike, deleteLike} from '../store/image'
 
 
 const mapDispatchToProps = function(dispatch){
   return{
-    createNewLike: (payload, imageId, userId) => dispatch(uploadLike(payload, imageId, userId))
+    createNewLike: (imageId, userId) => dispatch(uploadLike(imageId, userId)),
+    deleteLike: (imageId, userId) => dispatch(deleteLike(imageId, userId))
   }
 }
 
@@ -28,6 +29,7 @@ export const AddLike = props => {
       props.createNewLike(like, props.imageId, userId)
     } else{
       setLike(false)
+      props.deleteLike(props.imageId, userId)
     }
   }
 
