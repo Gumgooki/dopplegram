@@ -120,7 +120,7 @@ export const deleteImage = (userId, imageId) => async dispatch => {
 
 export const deleteLike = (userId, imageId) => async dispatch => {
   try{
-    const {data} = await axios.delete(`/api/image/${userId}/${imageId}`)
+    const {data} = await axios.delete(`/api/like/${userId}/${imageId}`)
     dispatch(removeLike(data, imageId))
   }catch(err){
     console.log(err)

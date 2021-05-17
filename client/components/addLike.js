@@ -25,10 +25,14 @@ export const AddLike = props => {
   const handleSubmit = (evt) => {
     evt.preventDefault()
     if(like === false){
+      console.log('in the if block', like)
       setLike(true)
-      props.createNewLike(like, props.imageId, userId)
+      console.log('if block, after setting like', like)
+      props.createNewLike(true, props.imageId, userId)
     } else{
+      console.log('in the else block', like)
       setLike(false)
+      console.log('in the else block, after setting like', like)
       props.deleteLike(props.imageId, userId)
     }
   }
