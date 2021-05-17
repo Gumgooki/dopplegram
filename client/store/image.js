@@ -10,6 +10,7 @@ const DELETE_USER_IMAGE = 'DELETE_USER_IMAGE'
 const CREATE_COMMENT = 'CREATE_COMMENT'
 const CREATE_LIKE = 'CREATE_LIKE'
 const DELETE_LIKE = 'DELETE_LIKE'
+const GET_LIKE = 'GET_LIKE'
 
 //initial state
 
@@ -48,6 +49,12 @@ const createComment = (comment, imageId) => ({
   imageId
 })
 
+const getLike = (like, imageId) => ({
+  type: GET_LIKE,
+  payload: like,
+  imageId
+})
+
 const createLike = (like, imageId) => ({
   type: CREATE_LIKE,
   payload: like,
@@ -81,14 +88,6 @@ export const uploadComment = (commentData, imageId, userId) => async dispatch =>
   }
 }
 
-export const uploadLike = (like, imageId, userId) => async dispatch => {
-  try{
-    let {data} = await axios.post(`/api/like/${imageId}/${userId}`, {'like':like})
-    dispatch(createLike(data, imageId))
-  }catch(err){
-    console.log(err)
-  }
-}
 
 
 export const receiveImages = () => async dispatch => {
@@ -100,11 +99,35 @@ export const receiveImages = () => async dispatch => {
   }
 }
 
+export const uploadLike = (like, imageId, userId) => async dispatch => {
+  try{
+    let {data} = await axios.post(`/api/like/${imageId}/${userId}`, {'like':like})
+    dispatch(createLike(data, imageId))
+  }catch(err){
+    console.log(err)
+  }
+}
+
 export const receiveUsersImages = (userId) => async dispatch => {
   try{
     const {data} = await axios.get(`/api/image/${userId}`)
     dispatch(getUsersImages(data))
   } catch(err){
+    console.log(err)
+  }
+}
+
+export const receiveLike = (imageId, userId) => async dispatch => {
+  try{
+    const {data} = await axios.get(`/api/like/${imageId}/${userId}`)
+    console.log(data)
+    dispatch(getLike(data, imageId))
+    if(data){
+      return data.like
+    }else{
+      return false
+    }
+  }catch(err){
     console.log(err)
   }
 }
@@ -120,7 +143,7 @@ export const deleteImage = (userId, imageId) => async dispatch => {
 
 export const deleteLike = (userId, imageId) => async dispatch => {
   try{
-    const {data} = await axios.delete(`/api/image/${userId}/${imageId}`)
+    const {data} = await axios.delete(`/api/like/${userId}/${imageId}`)
     dispatch(removeLike(data, imageId))
   }catch(err){
     console.log(err)

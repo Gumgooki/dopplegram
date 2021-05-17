@@ -1,12 +1,13 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
-import {uploadLike, deleteLike} from '../store/image'
+import {uploadLike, deleteLike, receiveLike} from '../store/image'
 
 
 const mapDispatchToProps = function(dispatch){
   return{
     createNewLike: (like, imageId, userId) => dispatch(uploadLike(like, imageId, userId)),
-    deleteLike: (imageId, userId) => dispatch(deleteLike(imageId, userId))
+    deleteLike: (imageId, userId) => dispatch(deleteLike(imageId, userId)),
+    fetchLike: (imageId, userId) => dispatch(receiveLike(imageId, userId))
   }
 }
 
@@ -20,13 +21,21 @@ export const AddLike = props => {
   const {userId} = props
   const [like, setLike] = useState(false)
 
+  useEffect(async () => {
+    if(props.fetchLike){
+      const didLike = await props.fetchLike(props.imageId, userId)
+      console.log('what did we get back from thunk?', didLike)
+      setLike(didLike)
+    }
+  }, [])
+
 
   //this isn't working
   const handleSubmit = (evt) => {
     evt.preventDefault()
     if(like === false){
       setLike(true)
-      props.createNewLike(like, props.imageId, userId)
+      props.createNewLike(true, props.imageId, userId)
     } else{
       setLike(false)
       props.deleteLike(props.imageId, userId)
@@ -34,10 +43,11 @@ export const AddLike = props => {
   }
 
   return(
-    <div>
+    <div className="likeBox">
       <button type="submit" onClick={handleSubmit}>
-        {like ? <>Unlike Image</> : <>Like Image</>}
+        {like ? <>Unlike</> : <>Like</>}
       </button>
+      <p>{props.imageLikes} Likes</p>
     </div>
   )
 

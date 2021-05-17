@@ -287,3 +287,12 @@ body {
   padding: 15px;
   font-style: italic;
 }
+
+.likeBox {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: space-around;
+  align-items: center;
+  padding-left: 2%;
+}
