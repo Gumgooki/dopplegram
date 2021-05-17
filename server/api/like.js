@@ -44,6 +44,13 @@ router.delete('/:imageId/:userId', async(req, res, next) => {
         imageId: imageId
       }
     })
+    const deLikedImage = await Image.findOne({
+      where: {
+        id: imageId
+      }
+    })
+    deLikedImage.decrement('totalLikes', {by: 1})
+
     res.status(201).json(delLiked)
   } catch(err){
     next(err)
