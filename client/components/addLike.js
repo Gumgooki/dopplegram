@@ -20,15 +20,14 @@ const mapStateToProps = state => {
 export const AddLike = props => {
   const {userId} = props
   const [like, setLike] = useState(false)
-  const [isLiked, setIsLiked] = useState(false)
 
   useEffect(async () => {
     if(props.fetchLike){
-      const test = await props.fetchLike(props.imageId, userId)
-      console.log('what did we get back from thunk?', test)
-      setIsLiked(true)
+      const didLike = await props.fetchLike(props.imageId, userId)
+      console.log('what did we get back from thunk?', didLike)
+      setLike(didLike)
     }
-  }, [like])
+  }, [])
 
 
   //this isn't working
