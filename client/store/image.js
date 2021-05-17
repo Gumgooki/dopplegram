@@ -10,6 +10,7 @@ const DELETE_USER_IMAGE = 'DELETE_USER_IMAGE'
 const CREATE_COMMENT = 'CREATE_COMMENT'
 const CREATE_LIKE = 'CREATE_LIKE'
 const DELETE_LIKE = 'DELETE_LIKE'
+const GET_LIKE = 'GET_LIKE'
 
 //initial state
 
@@ -45,6 +46,12 @@ const removeImage = (deletedImage, id) => ({
 const createComment = (comment, imageId) => ({
   type: CREATE_COMMENT,
   payload: comment,
+  imageId
+})
+
+const getLike = (like, imageId) => ({
+  type: GET_LIKE,
+  payload: like,
   imageId
 })
 
@@ -105,6 +112,21 @@ export const receiveUsersImages = (userId) => async dispatch => {
     const {data} = await axios.get(`/api/image/${userId}`)
     dispatch(getUsersImages(data))
   } catch(err){
+    console.log(err)
+  }
+}
+
+export const receiveLike = (imageId, userId) => async dispatch => {
+  try{
+    const {data} = await axios.get(`/api/like/${imageId}/${userId}`)
+    console.log(data)
+    dispatch(getLike(data, imageId))
+    if(data){
+      return data.like
+    }else{
+      return false
+    }
+  }catch(err){
     console.log(err)
   }
 }

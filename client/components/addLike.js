@@ -1,12 +1,13 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
-import {uploadLike, deleteLike} from '../store/image'
+import {uploadLike, deleteLike, receiveLike} from '../store/image'
 
 
 const mapDispatchToProps = function(dispatch){
   return{
     createNewLike: (like, imageId, userId) => dispatch(uploadLike(like, imageId, userId)),
-    deleteLike: (imageId, userId) => dispatch(deleteLike(imageId, userId))
+    deleteLike: (imageId, userId) => dispatch(deleteLike(imageId, userId)),
+    fetchLike: (imageId, userId) => dispatch(receiveLike(imageId, userId))
   }
 }
 
@@ -19,20 +20,25 @@ const mapStateToProps = state => {
 export const AddLike = props => {
   const {userId} = props
   const [like, setLike] = useState(false)
+  const [isLiked, setIsLiked] = useState(false)
+
+  useEffect(async () => {
+    if(props.fetchLike){
+      const test = await props.fetchLike(props.imageId, userId)
+      console.log('what did we get back from thunk?', test)
+      setIsLiked(true)
+    }
+  }, [like])
 
 
   //this isn't working
   const handleSubmit = (evt) => {
     evt.preventDefault()
     if(like === false){
-      console.log('in the if block', like)
       setLike(true)
-      console.log('if block, after setting like', like)
       props.createNewLike(true, props.imageId, userId)
     } else{
-      console.log('in the else block', like)
       setLike(false)
-      console.log('in the else block, after setting like', like)
       props.deleteLike(props.imageId, userId)
     }
   }
