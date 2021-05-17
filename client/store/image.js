@@ -88,14 +88,6 @@ export const uploadComment = (commentData, imageId, userId) => async dispatch =>
   }
 }
 
-export const uploadLike = (like, imageId, userId) => async dispatch => {
-  try{
-    let {data} = await axios.post(`/api/like/${imageId}/${userId}`, {'like':like})
-    dispatch(createLike(data, imageId))
-  }catch(err){
-    console.log(err)
-  }
-}
 
 
 export const receiveImages = () => async dispatch => {
@@ -103,6 +95,15 @@ export const receiveImages = () => async dispatch => {
     const {data} = await axios.get('/api/image')
     dispatch(getAllImages(data))
   } catch(err){
+    console.log(err)
+  }
+}
+
+export const uploadLike = (like, imageId, userId) => async dispatch => {
+  try{
+    let {data} = await axios.post(`/api/like/${imageId}/${userId}`, {'like':like})
+    dispatch(createLike(data, imageId))
+  }catch(err){
     console.log(err)
   }
 }

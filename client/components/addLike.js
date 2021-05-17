@@ -43,10 +43,11 @@ export const AddLike = props => {
   }
 
   return(
-    <div>
+    <div className="likeBox">
       <button type="submit" onClick={handleSubmit}>
-        {like ? <>Unlike Image</> : <>Like Image</>}
+        {like ? <>Unlike</> : <>Like</>}
       </button>
+      <p>{props.imageLikes} Likes</p>
     </div>
   )
 

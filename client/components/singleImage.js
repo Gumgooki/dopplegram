@@ -85,6 +85,7 @@ export const SingleImage = props => {
       <div className='imageContainer'>
         <img src={`http://localhost:3000/${imageObj.imageData}`}/>
       </div>
+      <AddLike imageLikes={imageObj.totalLikes} imageId={imageObj.id}/>
       <div className="imageDescription">{imageObj.imageDescription}</div>
       <p>Comments:</p>
       <CommentList imageId={imageObj.id} comments={imageObj.comments} expanded={expandCollapse.expanded}/>
@@ -106,7 +107,6 @@ export const SingleImage = props => {
         {expandCommentSubmit.extended &&
           <AddComment imageId={imageObj.id}/>
         }
-        <AddLike imageId={imageObj.id}/>
       </div>
     </div>
   )
