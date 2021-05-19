@@ -11,7 +11,6 @@ const sequelizeStore = require('connect-session-sequelize')(session.Store) //cre
 const dbStore = new sequelizeStore({db: db}) //configuring and creating our database store so we can save session data directly in DB
 const port = process.env.PORT || 3000;
 const socketio = require('socket.io')
-module.exports = app
 
 // keep all of our secret API keys in 'secrets.js'. If we gitignore that file, then nothing will ever show up in git.
 if(process.env.NODE_ENV !== 'production') {
@@ -115,3 +114,5 @@ if(require.main === module){
 } else {
   createApp()
 }
+
+module.exports = app
