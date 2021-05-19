@@ -16,8 +16,6 @@ const socketio = require('socket.io')
 if(process.env.NODE_ENV !== 'production') {
   require('../secrets')
 }
-//adding this here just to see if the googleoAth will work correctly
-require('../secrets')
 
 // passport registration
 passport.serializeUser((user, done) => {
