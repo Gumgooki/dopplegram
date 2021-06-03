@@ -86,7 +86,7 @@ export const SingleImage = (props) => {
 
       {/* TODO: this is harcoded right now; i would rather change this up so it can work no other ports/URLs */}
       <div className="imageContainer">
-        <img src={`${process.env.HOME_URL}/${imageObj.imageData}`} />
+        <img src={`/${imageObj.imageData}`} />
       </div>
       <AddLike imageLikes={imageObj.totalLikes} imageId={imageObj.id} />
       <div className="imageDescription">{imageObj.imageDescription}</div>
