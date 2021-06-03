@@ -8,7 +8,7 @@ let callbackURL = process.env.HOME_URL + process.env.GOOGLE_CALLBACK;
 
 if (process.env.HOME_URL === "https://desolate-dusk-97411.herokuapp.com") {
   callbackURL =
-    "https://desolate-dusk-97411.herokuapp.com" + process.env.GOOGLE_CALLBACK;
+    "https://desolate-dusk-97411.herokuapp.com/auth/google/callback";
 }
 
 const googleConfig = {
