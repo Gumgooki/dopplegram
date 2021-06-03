@@ -3,11 +3,19 @@ const { User } = require("../db/models/");
 const router = require("express").Router();
 const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 
+//hacky way to get around this
+let callbackURL = process.env.HOME_URL + process.env.GOOGLE_CALLBACK;
+
+if (process.env.HOME_URL === "https://desolate-dusk-97411.herokuapp.com") {
+  callbackURL =
+    "https://desolate-dusk-97411.herokuapp.com" + process.env.GOOGLE_CALLBACK;
+}
+
 const googleConfig = {
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
   // callbackURL: process.env.GOOGLE_CALLBACK
-  callbackURL: process.env.HOME_URL + process.env.GOOGLE_CALLBACK,
+  callbackURL: callbackURL,
   // callbackURL: "https://desolate-dusk-97411.herokuapp.com/auth/google/callback",
 };
 
