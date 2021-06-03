@@ -7,7 +7,8 @@ const googleConfig = {
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
   // callbackURL: process.env.GOOGLE_CALLBACK
-  callbackURL: "https://desolate-dusk-97411.herokuapp.com/auth/google/callback",
+  callbackURL: process.env.HOME_URL + process.env.GOOGLE_CALLBACK,
+  // callbackURL: "https://desolate-dusk-97411.herokuapp.com/auth/google/callback",
 };
 
 // configure the strategy with our config object, and write the function that passport will invoke after google sends us the user's profile and access token
