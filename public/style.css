@@ -14,6 +14,7 @@ body {
 
 /* Image Content */
 .imageContainer {
+  /* width: auto; */
   width: 512px;
   height: 512px;
   text-align: center;
@@ -295,4 +296,28 @@ body {
   align-content: space-around;
   align-items: center;
   padding-left: 2%;
+}
+
+@media only screen and (max-width: 1500px) {
+  .credentialForm {
+    margin: 5% 25%;
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  .credentialForm {
+    margin: 10%;
+  }
+}
+
+@media only screen and (max-width: 530px) {
+  .imageContainer {
+    width: 100vw;
+  }
+}
+
+@media only screen and (max-width: 920px) {
+  .AllImages {
+    margin: auto;
+  }
 }
